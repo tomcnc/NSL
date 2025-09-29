@@ -8,7 +8,7 @@ The C++ code relies on the **Armadillo** library (C++ Linear Algebra Library). P
 
 ### Structure and Navigation
 
-Each exercise sub-section is contained within its own directory (e.g., `es./1.1`, `es./1.2`, `es./1.3`). Additional you will find my analysis notebook `LSN_Notebook_01.ipynb`.
+Each exercise sub-section is contained within its own directory (e.g., `es_1.1`, `es_1.2`, `es_1.3`). Additional you will find my analysis notebook `LSN_Notebook_01.ipynb`.
 
 Inside each directory, you will find:
 * `main.cpp`: The source code for the experiment or simulation.
