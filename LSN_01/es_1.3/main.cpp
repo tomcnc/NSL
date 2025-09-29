@@ -61,7 +61,7 @@ int main(){
         for(int j{}; j < tpb; j++){
             start = rnd.Rannyu(0.0, d);
             theta = rnd.RanAngle();
-            // out_angle << setw(8) << theta << endl;
+            out_angle << setw(8) << theta << endl;
             end = start + sin(theta);
             if(end <= 0.0 || end >= d || is_equal(start, 0.0)){
                 hit++;
