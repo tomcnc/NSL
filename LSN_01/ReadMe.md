@@ -67,16 +67,13 @@ All commands in this guide assume you are starting from the **parent directory**
 The following commands ensure a **clean build** and **execution** for each exercise. They first remove old build files (`main.o`, `main.exe`, `*.data` files) and then compile and run.
 
 ```bash
-# Clean, Compile, and Run es_1.1 (Random Number Tests)
-cd es_1.1 && make remove_o remove_exe remove_output && rm -f plots/*.* && make && ./main.exe
+cd es_1.1 && make remove_o remove_exe remove_output && rm -f plots/* && make && ./main.exe
 cd ..
 
-# Clean, Compile, and Run es_1.2 (Central Limit Theorem)
-cd es_1.2 && make remove_o remove_exe remove_output && rm -f plots/*.* && make && ./main.exe
+cd es_1.2 && make remove_o remove_exe remove_output && rm -f plots/* && make && ./main.exe
 cd ..
 
-# Clean, Compile, and Run es_1.3 (Buffons Experiment)
-cd es_1.3 && make remove_o remove_exe remove_output && rm -f plots/*.* && make && ./main.exe
+cd es_1.3 && make remove_o remove_exe remove_output && rm -f plots/* && make && ./main.exe
 cd ..
 ```
 
@@ -85,7 +82,6 @@ cd ..
 After all data files are successfully generated, launch the primary analysis notebook directly from the parent directory:
 
 ```bash
-# Launches Jupyter Notebook for data processing
 jupyter-notebook LSN_Notebook_01.ipynb
 ```
 
