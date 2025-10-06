@@ -75,7 +75,7 @@ cd ..
 cd es_1.2 && make remove_o remove_exe remove_output && rm -f plots/*.* && make && ./main.exe
 cd ..
 
-# Clean, Compile, and Run es_1.3 (Buffon's Experiment)
+# Clean, Compile, and Run es_1.3 (Buffons Experiment)
 cd es_1.3 && make remove_o remove_exe remove_output && rm -f plots/*.* && make && ./main.exe
 cd ..
 ```
@@ -85,7 +85,7 @@ cd ..
 After all data files are successfully generated, launch the primary analysis notebook directly from the parent directory:
 
 ```bash
-# Launches the LSN_Notebook_01.ipynb for data processing
+# Launches Jupyter Notebook for data processing
 jupyter-notebook LSN_Notebook_01.ipynb
 ```
 
