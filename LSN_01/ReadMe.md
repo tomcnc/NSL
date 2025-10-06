@@ -68,15 +68,15 @@ The following commands ensure a **clean build** and **execution** for each exerc
 
 ```bash
 # Clean, Compile, and Run es_1.1 (Random Number Tests)
-cd es_1.1 && make remove_o remove_exe remove_output && make && ./main.exe
+cd es_1.1 && make remove_o remove_exe remove_output && rm -f plot/*.* && make && ./main.exe
 cd ..
 
 # Clean, Compile, and Run es_1.2 (Central Limit Theorem)
-cd es_1.2 && make remove_o remove_exe remove_output && make && ./main.exe
+cd es_1.2 && make remove_o remove_exe remove_output && rm -f plot/*.* && make && ./main.exe
 cd ..
 
 # Clean, Compile, and Run es_1.3 (Buffon's Experiment)
-cd es_1.3 && make remove_o remove_exe remove_output && make && ./main.exe
+cd es_1.3 && make remove_o remove_exe remove_output && rm -f plot/*.* && make && ./main.exe
 cd ..
 ```
 
