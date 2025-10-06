@@ -24,6 +24,7 @@ The repository root contains the analysis environment and the three exercise fol
 
 ### Detailed Directory Tree:
 
+```
 LSN_01/
 ├── LSN_Exercise_01.ipynb
 ├── LSN_Notebook_01.ipynb       # Primary Jupyter Notebook for consolidated analysis.
@@ -49,6 +50,7 @@ LSN_01/
     ├── main.o                  # Intermediate object file.
     ├── makefile                # Build automation script.
     └── plots                   # Repository for graphical output
+```
 
 ### Execution Workflow:
 
