@@ -1,0 +1,64 @@
+N_WALKS        10000
+N_BLOCKS       100
+ROW	       0
+N_DIM	       3
+START_POS      0 0 0
+N_STEP	       100
+RW_STEP	       1
+RW_TYPE DISCRETE
+POSITION       50
+
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+ENDINPUT
+
+// N_WALKS : total number of RW simulated
+// N_BLOCKS : total block number used to compute blocking method
+// ROW : Primes row read to start random generator
+// N_DIM : lattice dimension
+// START_POS : starting position
+// N_STEP : total number of step performed during a single random walk
+// RW_STEP : random walk step size
+// RW_TYPE : discrete for discrete lattice RW, continuous for uniform direction in space
+// if discrete use row 0, if continuous use row = 1. That allows to use indipendent pseudo-random sequences
+// position : gives which random walk will be printed for each block
+
+Standard input.dat form:
+
+N_WALKS        10000
+N_BLOCKS       100
+ROW            0
+N_DIM          3
+START_POS      0 0 0
+N_STEP         100
+RW_STEP        1
+POSITION       50 (prints the 50th RW for each block)
