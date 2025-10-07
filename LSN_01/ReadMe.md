@@ -1,4 +1,4 @@
-# Exercise 1: Computational Physics Simulations 💻
+# Exercise 1: Computational Physics Simulations
 
 This document provides the necessary guidelines for compiling, executing, and analyzing the C++ codes for this multi-part exercise set. The workflow involves independent execution within separate sub-directories, followed by centralized data analysis.
 
