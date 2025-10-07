@@ -63,30 +63,31 @@ echo ""
 TEMP_FILE="${INPUT_FILE}.tmp"
 echo "1. Modifica di $INPUT_FILE: impostazione di RW_TYPE = $RW_TYPE_VALUE (Ricerca limitata a 'ENDINPUT')"
 
+# *************** INIZIO BLOCCO CORRETTO AWK ***************
 # Usa AWK (Aho, Weinberger, Kernighan) per una potente manipolazione testuale del file.
 # L'uso di '-v' definisce la variabile `rw_type_val` accessibile all'interno dello script AWK.
 awk -v rw_type_val="$RW_TYPE_VALUE" '{
-    # Variabile per tracciare se abbiamo superato la sezione dati
-    # Se incontriamo "ENDINPUT", impostiamo un flag e stampiamo la riga corrente.
+    # 1. Se non abbiamo raggiunto ENDINPUT e troviamo RW_TYPE:
+    if (limit_reached != 1 && $1 == "RW_TYPE") {
+        # Stampa la riga modificata.
+        print "RW_TYPE " rw_type_val; 
+        # Passa subito alla riga successiva per evitare la doppia stampa.
+        next 
+    }
+    
+    # 2. Se incontriamo ENDINPUT, impostiamo il flag 'limit_reached'
+    #    (La stampa è gestita dal blocco finale)
     if ($1 == "ENDINPUT") {
-        print $0;
         limit_reached = 1; 
     }
     
-    # Sostituisce la riga RW_TYPE solo se non abbiamo ancora raggiunto ENDINPUT.
-    # $1 è il primo campo della riga (tipicamente la parola chiave).
-    if (limit_reached != 1 && $1 == "RW_TYPE") {
-        # Stampa la riga modificata, impostando il nuovo valore.
-        print "RW_TYPE " rw_type_val 
-    }
-    
-    # Stampa tutte le altre righe invariate. Questo garantisce che 
-    # tutte le righe del file (tranne quella modificata) vengano mantenute.
-    else if ($1 != "RW_TYPE") {
-        print $0
-    }
+    # 3. Stampa la riga corrente. Questo stampa tutte le righe 
+    #    NON modificate (e per le quali non è stato eseguito 'next').
+    print $0
 
 }' "$INPUT_FILE" > "$TEMP_FILE" # L'output di AWK viene reindirizzato a un file temporaneo
+
+# *************** FINE BLOCCO CORRETTO AWK ***************
 
 # Verifica se il file temporaneo è stato creato e sposta il risultato
 # Il test '-s' verifica che il file esista e non sia vuoto (dimensione > 0).
@@ -157,7 +158,8 @@ echo "   -> Pulizia dei file nell'archivio di destinazione per garantire un snap
 # Pulizia mirata della precedente cartella OUTPUT (rimuove solo i contenuti, non la cartella)
 # Usa 'rm' per rimuovere tutti i file (*.*) nei sottodirectory critici.
 if [ -d "$DEST_DIR/OUTPUT" ]; then
-    rm "$DEST_DIR/OUTPUT"/*.* rm "$DEST_DIR/OUTPUT/RW"/*.*
+    # Correzione: `rm "$DEST_DIR/OUTPUT"/*.* rm` era un comando errato, rimosso il secondo `rm`
+    rm "$DEST_DIR/OUTPUT"/*.* "$DEST_DIR/OUTPUT/RW"/*.*
     rm "$DEST_DIR/OUTPUT/SQRT_MEAN_DISTANCE2"/*.*
 fi
 
