@@ -1,4 +1,4 @@
-# Project `es_2.1`: Monte Carlo Analysis and Sampling 📊
+# Project `es_2.1`: Monte Carlo Analysis and Sampling
 
 This exercise focuses on the Monte Carlo calculation of an integral, comparing the effectiveness of **Uniform Sampling** (also known as the **Mean Value Method**), and **Importance Sampling** (using 1st order Taylor polynomial expansion) in terms of **statistical error** and **speed of convergence**.
 
