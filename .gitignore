@@ -1,0 +1,13 @@
+# ----------------------------------------------------------------------
+# 1. FILE DI SISTEMA E AMBIENTE (System and Environment Files)
+# ----------------------------------------------------------------------
+
+# Ignora i file di metadati di macOS
+.DS_Store
+
+# ----------------------------------------------------------------------
+# 2. JUPYTER NOTEBOOK CHECKPOINTS
+# ----------------------------------------------------------------------
+
+# Ignora i checkpoint generati da Jupyter/VS Code
+.ipynb_checkpoints/
