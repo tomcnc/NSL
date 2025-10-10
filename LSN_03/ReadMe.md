@@ -33,7 +33,7 @@ LSN_03/
 
 ### Execution Workflow:
 
-The analysis notebook (`LSN_Notebook_01.ipynb`) processes data from `es_3/OUTPUT/` directory. Therefore, **all simulations must be executed** before proceeding to the final analysis step.
+The analysis notebook (`LSN_Notebook_03.ipynb`) processes data from `es_3/OUTPUT/` directory. Therefore, **all simulations must be executed** before proceeding to the final analysis step.
 
 ---
 
