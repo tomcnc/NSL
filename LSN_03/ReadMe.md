@@ -46,7 +46,7 @@ These commands are available inside (`es_3`) directory for granular file managem
 | `make remove_exe` | Removes the executable file (`main.exe`). |
 | `make remove_o` | Removes all object files (`*.o`). |
 | `make remove_output` | **CAUTION**: Removes all data files (`*.data`) from the local `OUTPUT/` folder. |
-| `make remove_plot` | Removes all plot during the notebook analysis |
+| `make remove_plot` | Removes all plot produced during the notebook analysis from the `plot/` directory. |
 
 ## 3. Operational Guide
 
