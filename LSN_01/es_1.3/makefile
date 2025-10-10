@@ -1,9 +1,8 @@
 CXXFLAGS = -std=gnu++2b -g -O3 -Wall --pedantic
-FMTINCS = -lfmt
 AFLAGS = -larmadillo
 
 main.exe : main.o ../../generator/random.o ../../functions.h
-	g++ $(FMTINCS) $(AFLAGS) main.o ../../generator/random.o -o $@
+	g++ $(AFLAGS) main.o ../../generator/random.o -o $@
 
 main.o : main.cpp ../../functions.h
 	g++ main.cpp $(CXXFLAGS) -c -o $@

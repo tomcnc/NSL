@@ -1,5 +1,4 @@
 #include <cmath>
-#include <fmt/format.h>
 #include <fstream>
 #include <iostream>
 #include <iomanip>

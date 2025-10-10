@@ -1,7 +1,6 @@
 #include <armadillo>
 #include <cmath>
 #include <fstream>
-#include <fmt/format.h>
 #include <iostream>
 
 #include "../../generator/random.h"

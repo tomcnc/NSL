@@ -1,6 +1,5 @@
 #include <iostream>
 #include <fstream>
-#include <fmt/format.h>
 #include <cmath>
 
 #include "../../generator/random.h"
