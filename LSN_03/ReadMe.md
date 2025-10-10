@@ -50,7 +50,7 @@ These commands are available inside (`es_3`) directory for granular file managem
 
 ## 3. Operational Guide
 
-All commands in this guide assume you are starting from the **exercise directory** (`LSN_EXERCISES/LSN_03/es_3`).
+All commands in this guide assume you are starting from the **exercise directory** (`LSN_03/es_3`).
 
 ### Step 1: Cleanup, compilation and execution
 
