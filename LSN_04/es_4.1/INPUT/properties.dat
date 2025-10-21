@@ -1,0 +1,45 @@
+TOTAL_ENERGY
+TOTAL_ENERGY_STEP
+POTENTIAL_ENERGY
+POTENTIAL_ENERGY_STEP
+KINETIC_ENERGY
+KINETIC_ENERGY_STEP
+TEMPERATURE
+TEMPERATURE_STEP
+PRESSURE
+PRESSURE_STEP
+POFV              30
+ 
+ENDPROPERTIES
+
+/////////////////////////////////////
+
+Possible properties:
+
+LJ Molecular Dynamics or Monte Carlo:
+
+TOTAL_ENERGY
+TOTAL_ENERGY_STEP       // Added by me
+POTENTIAL_ENERGY
+POTENTIAL_ENERGY_STEP   // Added by me
+KINETIC_ENERGY
+KINETIC_ENERGY_STEP     // Added by me
+TEMPERATURE
+TEMPERATURE_STEP        // Added by me
+PRESSURE
+PRESSURE_STEP           // Added by me
+GOFR              100
+
+Only LJ Molecular Dynamics:
+
+POFV              30
+
+Ising 1D MRT^2 or Gibbs:
+
+TOTAL_ENERGY
+MAGNETIZATION
+MAGNETIZATION_STEP  // Added by me
+SPECIFIC_HEAT
+SPECIFIC_HEAT_STEP  // Added by me
+SUSCEPTIBILITY
+SUSCEPTIBILITY_STEP // Added by me
