@@ -1,13 +1,27 @@
 # ----------------------------------------------------------------------
-# 1. FILE DI SISTEMA E AMBIENTE (System and Environment Files)
+# 1. SYSTEM & ENVIROMENT FILES
 # ----------------------------------------------------------------------
 
 # Ignora i file di metadati di macOS
-.DS_Store
+*.DS_Store
 
 # ----------------------------------------------------------------------
 # 2. JUPYTER NOTEBOOK CHECKPOINTS
 # ----------------------------------------------------------------------
 
 # Ignora i checkpoint generati da Jupyter/VS Code
-.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# ----------------------------------------------------------------------
+# 3. OBJECT FILES
+# ----------------------------------------------------------------------
+
+# Ignora i file .o generati dalla compilazione
+*.o
+
+# ----------------------------------------------------------------------
+# 4. EXECUTABLE FILES
+# ----------------------------------------------------------------------
+
+# Ignora i file .o generati dalla compilazione   
+*.exe  
