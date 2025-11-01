@@ -24,4 +24,4 @@
 # ----------------------------------------------------------------------
 
 # Ignora i file .o generati dalla compilazione   
-*.exe  
+# *.exe  
