@@ -8,7 +8,7 @@ TEMPERATURE
 TEMPERATURE_STEP
 PRESSURE
 PRESSURE_STEP
-POFV              30
+POFV 30
  
 ENDPROPERTIES
 
@@ -28,11 +28,11 @@ TEMPERATURE
 TEMPERATURE_STEP        // Added by me
 PRESSURE
 PRESSURE_STEP           // Added by me
-GOFR              100
+GOFR 100
 
 Only LJ Molecular Dynamics:
 
-POFV              30
+POFV 30
 
 Ising 1D MRT^2 or Gibbs:
 

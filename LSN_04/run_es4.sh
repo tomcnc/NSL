@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# set -e: Interrompe lo script immediatamente se un comando fallisce.
+# set -o pipefail: Assicura che una pipeline fallisca se fallisce un qualsiasi comando al suo interno.
+set -e
+set -o pipefail
+
 # ==============================================================================
 # SCRIPT PER L'ESECUZIONE DEGLI ESERCIZI 4.1, 4.2 e 4.3 (Molecular Dynamics)
 #
@@ -21,6 +26,10 @@ INPUT_DIR="$SIM_DIR/INPUT"   # Directory che contiene i file di input (es. input
 OUTPUT_DIR="$SIM_DIR/OUTPUT" # Directory che riceve i risultati dell'output
 INPUT_FILE="$INPUT_DIR/input.dat" # Percorso completo del file dei parametri di input
 EXECUTABLE_PATH="$SOURCE_DIR/simulator.exe" # Percorso dell'eseguibile compilato
+COMPILATION_LOG="$OUTPUT_DIR/compilation_log.txt"   # File per il log della compilazione
+
+# Assicurarsi che la directory OUTPUT esista per il log
+mkdir -p "$OUTPUT_DIR/CONFIG"
 
 echo "--------------------------------------------------------"
 echo "--- UTILITY FUNCTIONS DEFINITION ---"
@@ -89,38 +98,24 @@ extract_last_temp() {
     echo "$LAST_TEMP" # Stampa il valore estratto come output della funzione
 }
 
+# ==============================================================================
+# GESTIONE COMPILAZIONE
+# ==============================================================================
 echo "--------------------------------------------------------"
-echo "--- CHECK AND COMPILATION ---"
-# ------------------------------------------------------------------------------
-# --- CONTROLLO E COMPILAZIONE CONDIZIONALE ---
-# ------------------------------------------------------------------------------
+echo "COMPILATION: Attempting 'make simulator.exe'..."
+echo "             Output redirected to $COMPILATION_LOG (and console)."
 
-compile_check() {
-    echo "--------------------------------------------------------"
-    # Controllo se l'eseguibile manca o se i sorgenti sono più recenti dell'eseguibile
-    # ! -f "$EXECUTABLE_PATH": Verifica che l'eseguibile NON esista.
-    # ||: Operatore OR logico.
-    # "$SOURCE_DIR/NSL_SIMULATOR.cpp" -nt "$EXECUTABLE_PATH": Verifica se il file sorgente (.cpp) è 'newer than' (-nt) l'eseguibile.
-    if [ ! -f "$EXECUTABLE_PATH" ] || [ "$SOURCE_DIR/NSL_SIMULATOR.cpp" -nt "$EXECUTABLE_PATH" ]; then
-        echo "COMPILATION: Executable missing or sources modified. Starting re-compilation..."
-        
-        # 1. Compilazione del codice
-        # make -C "$SOURCE_DIR": Esegue il comando 'make' nella directory dei sorgenti (-C flag).
-        # || { ...; exit 1; }: Se il comando precedente fallisce ('||'), stampa un errore ed esce dallo script.
-        make -C "$SOURCE_DIR" || { echo "ERRORE: La compilazione è fallita. Uscita."; exit 1; }
-        echo "Compilation completed successfully."
-
-        # 2. Rimozione dei file oggetto (.o)
-        echo "CLEANUP: Removing temporary object files (.o)."
-        make -C "$SOURCE_DIR" clean_o || { echo "ATTENTION: make clean_o failed, continuing."; }
-    else
-        echo "SKIP COMPILATION: Executable ($EXECUTABLE_PATH) already up-to-date."
-    fi
-    echo "--------------------------------------------------------"
-}
-
-# Esegui il controllo iniziale
-compile_check
+# Esegue make, reindirizzando l'output (stdout e stderr) al log file, 
+# e usa 'tee' per stampare anche a console (/dev/tty)
+if make -C "$SOURCE_DIR" simulator.exe 2>&1 | tee "$COMPILATION_LOG"; then
+    echo "COMPILATION SUCCESSFUL: Executable is ready at $EXECUTABLE_PATH."
+else
+    # Se il comando make fallisce (codice di uscita != 0)
+    echo "========================================================"
+    echo "ATTENTION: COMPILATION FAILED."
+    echo "Check the C++ code for syntax or linking errors."
+    exit 1
+fi
 
 # Pulizia di eventuali file di output prodotti da esecuzioni fallite
 echo "--------------------------------------------------------"
@@ -147,7 +142,7 @@ echo "--------------------------------------------------------"
 
 # Elimina le configurazioni di restart e reimposta la configurazione iniziale (FCC)
 echo "Removing temporary configuration file 'conf-1.xyz'."
-rm $INPUT_DIR/CONFIG/conf-1.xyz # rm: rimuove il file conf-1.xyz
+rm -f $INPUT_DIR/CONFIG/conf-1.xyz # rm: rimuove il file conf-1.xyz
 echo "Restoring initial configuration (config.fcc) to config.xyz."
 cp $INPUT_DIR/CONFIG/config.fcc $INPUT_DIR/CONFIG/config.xyz 
 
