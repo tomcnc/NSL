@@ -13,9 +13,9 @@ The **`NSL_SIMULATOR`** code is dependent on the **Armadillo C++** linear algebr
 
 This project implements and compares two fundamental Markov Chain Monte Carlo (MCMC) algorithms:
 
-- **Metropolis-Hastings M(RT)$^2$ Algorithm;
+- **Metropolis-Hastings M(RT)$^2$** Algorithm;
 
-- Gibbs Sampling Algorithm;
+- **Gibbs Sampling** Algorithm;
 
 to simulate the thermodynamic behavior of the **one-dimensional (1D) Ising Model**. The 1D Ising model serves as an ideal test due to its analytical solvability, especially the confirmation that it lacks a phase transition at finite temperatures.
 
