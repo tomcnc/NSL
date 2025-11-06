@@ -139,7 +139,7 @@ chmod +x metropolis_run.sh
 
 #### Run the simulations
 ```bash
-./gibbs_run.sh && metropolis_run.sh
+./gibbs_run.sh && ./metropolis_run.sh
 ```
 
 **Script Behavior**: During execution, the script will output status messages indicating which part of the exercise is currently being processed (e.g., Equilibration H on, Simulation H off, etc.).
