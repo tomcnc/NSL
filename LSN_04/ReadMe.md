@@ -1,5 +1,5 @@
 
-# Exercise 4: Molecular Dynamics for a Lennard-Jones NVE Gas Model 💨
+# Exercise 4: Molecular Dynamics for a Lennard-Jones NVE Gas Model
 
 This document provides the necessary guidelines for executing and analyzing the code developed for the fourth assignment of the **Computational Physics Laboratory (LSN)** course.
 
@@ -66,7 +66,7 @@ This file contains configuration parameters necessary to set up the simulation.
 
 | Parameter | Possible Value | Description/Notes |
 | :--- | :--- | :--- |
-| `SIMULATION_TYPE` | $0/1/2/3$ | $0$: LJ MD (NVE); $1$: LJ MC (NVT); $2$: Ising 1D MC (MRT$^2$); $3$: Ising 1D MC (Gibbs). |
+| `SIMULATION_TYPE` | $0/1/2/3$ | $0$: LJ MD (NVE); $1$: LJ MC (NVT); $2$: Ising 1D MC (M(RT)$^2$); $3$: Ising 1D MC (Gibbs). |
 | `DISTRIBUTION_TYPE` | $0/1$ | $0$: **Maxwell-Boltzmann distribution** (initial velocities); $1$: Dirac Delta distribution. |
 | `RESTART` | $0/1$ | $0$: Start from initial configuration/velocities; $1$: Restart from previous configuration files. |
 | `TEMP` | $\in \mathbb{R}^+$ | The reduced temperature $T^*$. |
@@ -108,7 +108,7 @@ This file contains the **Cartesian coordinates** ($x, y, z$) for each particle, 
 
 ---
 
-## 3. Execution Script: `run_es4.sh` 💻
+## 3. Execution Script: `run_es4.sh`
 
 The **`run_es4.sh`** Bash script automates the entire exercise workflow, including compilation, sequential execution of all required parts, and output management.
 
