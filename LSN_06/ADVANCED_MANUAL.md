@@ -248,7 +248,7 @@ RHO 1.0
 R_CUT 0.0 
 DELTA 0.0
 NBLOCKS 1 
-NSTEPS 200000  
+NSTEPS 20000  
 
 ENDINPUT
 ```
@@ -407,3 +407,8 @@ make remove
 
 ## 4. Restoring Initial Configurations
 
+- Clean up `NSL_SIMULATOR` directory:
+```bash
+rm -f ../INPUT/CONFIG/config.spin
+rm -f ../INPUT/seed.out
+```
