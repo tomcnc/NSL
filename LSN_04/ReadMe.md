@@ -94,14 +94,12 @@ This file lists the properties the simulator measures and outputs.
 | `TEMPERATURE_STEP` | Istantaneous temperature | $0, 1$ | ✅ |
 | `PRESSURE` | Average pressure | $0, 1$ | ✅ |
 | `PRESSURE_STEP` | Istantaneous pressure | $0, 1$ | ✅ |
-| `GOFR` | Radial distribution function $g(r)$ | $0, 1$ | ✅ |
-| **`POFV`** | **Velocity probability distribution** | **$0$** | |
+| `GOFR` | Radial distribution function $g(r)$ | $0, 1$ | ❌ |
+| **`POFV`** | **Velocity probability distribution** | **$0$** | ✅ |
 | `MAGNETIZATION` | Magnetization | $2, 3$ | ❌ |
 | `MAGNETIZATION_STEP` | Istantaneous magnetization | $2, 3$ | ❌ |
 | `SPECIFIC_HEAT` | Specific Heat | $2, 3$ | ❌ |
-| `SPECIFIC_HEAT_STEP` | Istantaneous specific Heat | $2, 3$ | ❌ |
 | `SUSCEPTIBILITY` | Susceptibility | $2, 3$ | ❌ |
-| `SUSCEPTIBILITY_STEP` | Istantaneous susceptibility | $2, 3$ | ❌ |
 | `ENDPROPERTIES` | N/A | Marker indicating the end of the properties file. |
 
 ### `config.xyz`
