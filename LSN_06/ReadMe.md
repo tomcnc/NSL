@@ -90,7 +90,7 @@ This file contains configuration parameters necessary to set up the simulation.
 
 | Parameter | Possible Value | Description/Notes |
 | :--- | :--- | :--- |
-| `SIMULATION_TYPE` | $2/3$ $J$ $H$ | $2$: Ising 1D MC (MRT$^2$); $3$: Ising 1D MC (Gibbs); $J$: spin coupling interaction; $H$: external magnetic field |
+| `SIMULATION_TYPE` | $2/3$  $J$  $H$ | $2$: Ising 1D MC (MRT$^2$); $3$: Ising 1D MC (Gibbs); $J$: spin coupling interaction; $H$: external magnetic field |
 | `RESTART` | $0/1$ | $0$: Start from initial configuration/velocities; $1$: Restart from previous configuration files. |
 | `TEMP` | $\in \left[ 0.3; 2.0 \right]$ | Temperature $T$. |
 | `NPART` | $50$ | **Do not change** (critical for initialization). |
