@@ -26,7 +26,7 @@ INPUT_DIR="$SIM_DIR/INPUT"   # Directory che contiene i file di input (es. input
 OUTPUT_DIR="$SIM_DIR/OUTPUT" # Directory che riceve i risultati dell'output
 INPUT_FILE="$INPUT_DIR/input.dat" # Percorso completo del file dei parametri di input
 EXECUTABLE_PATH="$SOURCE_DIR/simulator.exe" # Percorso dell'eseguibile compilato
-COMPILATION_LOG="$OUTPUT_DIR/compilation_log.txt"   # File per il log della compilazione
+COMPILATION_LOG="$OUTPUT_DIR/compilation_log.txt"   # File per il log della compilazione 
 
 # Assicurarsi che la directory OUTPUT esista per il log
 mkdir -p "$OUTPUT_DIR/CONFIG"
@@ -285,6 +285,9 @@ echo "Copying configurations $EQ_CONF_DIR/conf-1.xyz and $EQ_CONF_DIR/config.xyz
 cp "$EQ_CONF_DIR/conf-1.xyz" "$SIM_INPUT_CONF/conf-1.xyz"
 cp "$EQ_CONF_DIR/config.xyz" "$SIM_INPUT_CONF/config.xyz"
 echo "Final configurations copied to $SIM_INPUT_CONF."
+echo "Copying configurations $EQ_DIR/OUTPUT/seed.out for RESTART."
+cp "$EQ_DIR/OUTPUT/seed.out" "$INPUT_DIR"
+echo "seed.out copied to $INPUT_DIR."
 
 
 # --- ESECUZIONE SIMULAZIONE PRINCIPALE 4.2 ---
@@ -370,6 +373,9 @@ echo "Copying inverted configurations from $EQ_OUT_CONF to simulate time reversa
 cp "$EQ_OUT_CONF/config.xyz" "$SIM_INPUT_CONF/conf-1.xyz" # r(finale) -> r(iniziale-dt)
 cp "$EQ_OUT_CONF/conf-1.xyz" "$SIM_INPUT_CONF/config.xyz" # r(finale-dt) -> r(iniziale)
 echo "Final configurations copied to $SIM_INPUT_CONF."
+echo "Copying $EQ_DIR/OUTPUT/seed.out to $INPUT_DIR"
+cp "$EQ_DIR/OUTPUT/seed.out" "$INPUT_DIR/."
+echo "$EQ_DIR/OUTPUT/seed.out copied to $INPUT_DIR"
 
 # --- ESECUZIONE INVERSIONE 1 ---
 echo "--------------------------------------------------------"
@@ -429,6 +435,9 @@ echo "Copying inverted configurations from $RUN_OUT_CONF to simulate time revers
 cp "$RUN_OUT_CONF/config.xyz" "$SIM_INPUT_CONF/conf-1.xyz" # r(finale Lunga) -> r(iniziale-dt)
 cp "$RUN_OUT_CONF/conf-1.xyz" "$SIM_INPUT_CONF/config.xyz" # r(finale-dt Lunga) -> r(iniziale)
 echo "Final configurations copied to $SIM_INPUT_CONF."
+echo "Copying $RUN_DIR/OUTPUT/seed.out to $INPUT_DIR"
+cp "$RUN_DIR/OUTPUT/seed.out" "$INPUT_DIR/."
+echo "$RUN_DIR/OUTPUT/seed.out copied to $INPUT_DIR"
 
 # --- ESECUZIONE INVERSIONE 2 ---
 echo "--------------------------------------------------------"
@@ -484,7 +493,8 @@ echo "Removing temporary configuration file 'conf-1.xyz'."
 rm $INPUT_DIR/CONFIG/conf-1.xyz # rm: rimuove il file conf-1.xyz
 echo "Restoring initial configuration (config.fcc) to config.xyz."
 cp $INPUT_DIR/CONFIG/config.fcc $INPUT_DIR/CONFIG/config.xyz 
-
+echo "Removing file 'seed.out'."
+rm "$INPUT_DIR/seed.out"
 
 echo "--------------------------------------------------------"
 echo "Ex 4 completed. Check results in directories es_4.1, es_4.2, es_4.3."

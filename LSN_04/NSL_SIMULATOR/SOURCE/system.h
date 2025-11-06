@@ -53,7 +53,7 @@ private:
   bool _measure_temp, _measure_pressure, _measure_gofr;                     // Flags for measuring temperature, pressure, and radial dist. function
   bool _measure_temp_step, _measure_pressure_step;                          // Flags for measuring temperature and pressure at each step
   bool _measure_magnet, _measure_cv, _measure_chi;                          // Flags for measuring magnetization, heat capacity, and susceptibility
-  bool _measure_magnet_step, _measure_cv_step, _measure_chi_step;           // Flags for measuring magnetization, heat capacity, and susceptibility at each step
+  bool _measure_magnet_step;                                                // Flags for measuring magnetization, heat capacity, and susceptibility at each step
   bool _measure_pofv;                                                       // Flag for measuring the velocity modulus distribution
   int _index_penergy, _index_kenergy, _index_tenergy;                       // Indices for accessing energy-related properties in vec _measurement
   int _index_temp, _index_pressure, _index_gofr;                            // Indices for accessing temperature, pressure, and radial dist. function

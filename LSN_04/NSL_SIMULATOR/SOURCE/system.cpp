@@ -133,14 +133,14 @@ int System :: pbc(int i){ // Enforce periodic boundary conditions for spins
 //MODIFY BY ME (BEFORE NO ARGUMENT)
 void System :: initialize(){ // Initialize the System object according to the content of the input files in the ../INPUT/ directory
 
-  int p1, p2; // Read from ../INPUT/Primes a pair of numbers to be used to initialize the RNG
-  ifstream Primes("../INPUT/Primes");
-  Primes >> p1 >> p2 ;
-  Primes.close();
-  int seed[4]; // Read the seed of the RNG
-  ifstream Seed("../INPUT/seed.in");
-  Seed >> seed[0] >> seed[1] >> seed[2] >> seed[3];
-  _rnd.SetRandom(seed,p1,p2);
+  // int p1, p2; // Read from ../INPUT/Primes a pair of numbers to be used to initialize the RNG
+  // ifstream Primes("../INPUT/Primes");
+  // Primes >> p1 >> p2 ;
+  // Primes.close();
+  // int seed[4]; // Read the seed of the RNG
+  // ifstream Seed("../INPUT/seed.in");
+  // Seed >> seed[0] >> seed[1] >> seed[2] >> seed[3];
+  // _rnd.SetRandom(seed,p1,p2);
 
   ofstream couta("../OUTPUT/acceptance.dat"); // Set the heading line in file ../OUTPUT/acceptance.dat
   couta << "#   N_BLOCK:  ACCEPTANCE:" << endl;
@@ -177,6 +177,12 @@ void System :: initialize(){ // Initialize the System object according to the co
           }
       } else if( property == "RESTART" ){
         input >> _restart;
+        // Added here the LCG routine (more useful since allow to change seed and restart reading seed.out)
+        if(_restart){
+          _rnd.RestartRandom();  // LCG restart routine using Primes file first row
+        } else{
+          _rnd.StartRandom();  // LCG start routine using Primes file first row
+        }
       } else if( property == "TEMP" ){
         input >> _temp;
         _beta = 1.0/_temp;
@@ -369,9 +375,7 @@ void System :: initialize_properties(){ // Initialize data members used for meas
   _measure_magnet        = false;
   _measure_magnet_step   = false; // Added by me
   _measure_cv            = false;
-  _measure_cv_step       = false; // Added by me
   _measure_chi           = false;
-  _measure_chi_step      = false; // Added by me
   _measure_pofv          = false; // Added by me
 
   ifstream input("../INPUT/properties.dat");
@@ -506,12 +510,6 @@ void System :: initialize_properties(){ // Initialize data members used for meas
         _measure_cv = true;
         _index_cv = index_property;
         index_property++;
-      } else if( property == "SPECIFIC_HEAT_STEP" ){
-        ofstream coutcvs("../OUTPUT/specific_heat_step.dat");
-        coutcvs << "#           CV_STEP:" << endl;
-        coutcvs.close();
-        // _nprop++;
-        _measure_cv_step = true;
       } else if( property == "SUSCEPTIBILITY" ){
         ofstream coutchi("../OUTPUT/susceptibility.dat");
         coutchi << "#     BLOCK:         ACTUAL_CHI:            CHI_AVE:              ERROR:" << endl;
@@ -520,12 +518,6 @@ void System :: initialize_properties(){ // Initialize data members used for meas
         _measure_chi = true;
         _index_chi = index_property;
         index_property++;
-      } else if( property == "SUSCEPTIBILITY_STEP" ){
-        ofstream coutchis("../OUTPUT/susceptibility_step.dat");
-        coutchis << "#          CHI_STEP:" << endl;
-        coutchis.close();
-        // _nprop++;
-        _measure_chi_step = true;
       } else if( property == "ENDPROPERTIES" ){
         ofstream coutf;
         coutf.open("../OUTPUT/output.dat",ios::app);
@@ -834,29 +826,11 @@ void System :: measure(){ // Measure properties
   if (_measure_cv){
   }
 
-  // MAGNETIZATION PER PARTICLE PER STEP //////////////////////////////////////////
-  // TO BE FIXED IN EXERCISE 6
-  // This method prints at each step specific step when property "SPECIFIC HEAT_STEP" is placed in properties.dat
-  // Added by me
-  if (_measure_cv_step){
-    ofstream coutcvs("../OUTPUT/specific_heat_step.dat", ios::app);
-    coutcvs << setw(20) << _measurement[_index_cv] << endl;
-    coutcvs.close();
-  }
-
   // SUSCEPTIBILITY ////////////////////////////////////////////////////////////
   // TO BE FIXED IN EXERCISE 6
   if (_measure_chi){
   }
 
-  // SUSCEPTIBILITY PER PARTICLE PER STEP //////////////////////////////////////////
-  // This method prints at each step susceptibility when property "SUSCEPTIBILITY_STEP" is placed in properties.dat
-  // Added by me
-  if (_measure_chi_step){
-    ofstream coutchis("../OUTPUT/susceptibility_step.dat", ios::app);
-    coutchis << setw(20) << _measurement[_index_chi] << endl;
-    coutchis.close();
-  }
   _block_av += _measurement; //Update block accumulators
 
   return;

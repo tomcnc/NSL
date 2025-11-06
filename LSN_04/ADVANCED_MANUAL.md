@@ -162,6 +162,7 @@ ENDINPUT
 ```bash
 cp ../../es_4.2/equilibration/OUTPUT/CONFIG/conf-1.xyz ../INPUT/CONFIG/.
 cp ../../es_4.2/equilibration/OUTPUT/CONFIG/config.xyz ../INPUT/CONFIG/config.xyz
+cp ../../es_4.2/equilibration/OUTPUT/seed.out ../INPUT/.
 ```
 
 - Execute Simulation:
@@ -199,6 +200,7 @@ ENDINPUT
 ```bash
 cp ../../es_4.2/equilibration/OUTPUT/CONFIG/conf-1.xyz ../INPUT/CONFIG/config.xyz
 cp ../../es_4.2/equilibration/OUTPUT/CONFIG/config.xyz ../INPUT/CONFIG/conf-1.xyz
+cp ../../es_4.2/equilibration/OUTPUT/seed.out ../INPUT/.
 ```
 
 **NB**: make sure that `conf-1.xyz` is overwritten with `config.xyz` and viceversa since we want to perform a time-reversal simulation.
@@ -238,6 +240,7 @@ ENDINPUT
 ```bash
 cp ../../es_4.2/simulation/OUTPUT/CONFIG/conf-1.xyz ../INPUT/CONFIG/config.xyz
 cp ../../es_4.2/simulation/OUTPUT/CONFIG/config.xyz ../INPUT/CONFIG/conf-1.xyz
+cp ../../es_4.2/simulation/OUTPUT/seed.out ../INPUT/.
 ```
 
 **NB**: make sure that `conf-1.xyz` is overwritten with `config.xyz` and viceversa since we want to perform a time-reversal simulation.
@@ -252,4 +255,11 @@ cp ../../es_4.2/simulation/OUTPUT/CONFIG/config.xyz ../INPUT/CONFIG/conf-1.xyz
 cp -r ../OUTPUT ../../es_4.3/back_2/.
 cp -r ../INPUT ../../es_4.3/back_2/.
 make remove
+```
+
+- Restore `../INPUT/` directory:
+```bash
+rm ../INPUT/CONFIG/conf-1.xyz
+cp ../INPUT/CONFIG/config.fcc ../INPUT/CONFIG/config.xyz 
+rm ../INPUT/seed.out
 ```
