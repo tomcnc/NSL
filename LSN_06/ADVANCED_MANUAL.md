@@ -1,4 +1,4 @@
-# ADVANCED_MANUAL.md: Advanced Manual Execution and Troubleshooting Guide
+# Advanced Manual Execution and Troubleshooting Guide
 
 This document provides step-by-step instructions for manually executing the entire simulation batch. This procedure should only be followed if the automated scripts (`gibbs_run.sh` and `metropoli_run.sh`) fail or if advanced debugging is required.
 
