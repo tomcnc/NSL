@@ -64,7 +64,7 @@ private:
   int _n_bins_v;                                                            // Number of bins for velocity modulus distribution
   double _bin_size;                                                         // Size of bins for radial distribution function
   double _bin_size_v;                                                       // Size of bins for velocity modulus distribution
-  double _pofv_normalization;                                               // Normalization constant for velocity modulus distribution
+  double _pofv_normalization, _pofv_increment;                              // Normalization constant for velocity modulus distribution
   double _vtail, _ptail;                                                    // Tail corrections for energy and pressure
   vec _block_av;                                                            // Block averages of properties
   vec _global_av;                                                           // Global averages of properties

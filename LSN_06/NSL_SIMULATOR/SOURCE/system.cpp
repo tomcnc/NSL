@@ -483,6 +483,7 @@ void System :: initialize_properties(){ // Initialize data members used for meas
         _nprop += _n_bins_v;
         _bin_size_v = 3.5*sqrt(3.0*_temp)/(double)_n_bins_v; // Max sampling velocity is set to 3.5 times the mean velocity
         _pofv_normalization = _npart * _bin_size_v; // Normalization constant
+        _pofv_increment = 1.0/_pofv_normalization; // Increment normalized to avoid multiple divisions
         _measure_pofv = true;
         _index_pofv = index_property;
         index_property += _n_bins_v;
@@ -730,7 +731,7 @@ void System :: measure(){ // Measure properties
 
       // Check if index bin related to the velocity falls out of range
       if(vel_bin_index < _n_bins_v ){
-        _measurement(_index_pofv + vel_bin_index)+= 1.0/_pofv_normalization;
+        _measurement(_index_pofv + vel_bin_index)+= _pofv_increment;
       }
     }
   }
