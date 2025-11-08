@@ -68,25 +68,32 @@ double System :: Force(int i, int dim){
 }
 
 void System :: move(int i){ // Propose a MC move for particle i
-  if(_sim_type == 3){ //Gibbs sampler for Ising
-    // TO BE FIXED IN EXERCISE 6
-  } else {           // M(RT)^2
-    if(_sim_type == 1){       // LJ system
-      vec shift(_ndim);       // Will store the proposed translation
-      for(int j=0; j<_ndim; j++){
-        shift(j) = _rnd.Rannyu(-1.0,1.0) * _delta; // uniform distribution in [-_delta;_delta)
-      }
-      _particle(i).translate(shift, _side);  //Call the function Particle::translate
-      if(this->metro(i)){ //Metropolis acceptance evaluation
-        _particle(i).acceptmove();
-        _naccepted++;
-      } else _particle(i).moveback(); //If translation is rejected, restore the old configuration
-    } else {                  // Ising 1D
-      if(this->metro(i)){     //Metropolis acceptance evaluation for a spin flip involving spin i
-        _particle(i).flip();  //If accepted, the spin i is flipped
-        _naccepted++;
-      }
+  if(_sim_type == 1){       // M(RT)^2 LJ NVT system
+    vec shift(_ndim);       // Will store the proposed translation
+    for(int j=0; j<_ndim; j++){
+      shift(j) = _rnd.Rannyu(-1.0,1.0) * _delta; // Uniform distribution in [-_delta;_delta)
     }
+    _particle(i).translate(shift, _side);  // Call the function Particle::translate
+    if(this->metro(i)){ // Metropolis acceptance evaluation
+      _particle(i).acceptmove();
+      _naccepted++;
+    } else _particle(i).moveback(); // If translation is rejected, restore the old configuration
+  } else if(_sim_type == 2){  // Ising 1D M(RT)^2
+      if(this->metro(i)){     // Metropolis acceptance evaluation for a spin flip involving spin i
+        _particle(i).flip();  // If accepted, the spin i is flipped
+        _naccepted++;
+      }
+  } else if(_sim_type == 3){ // Gibbs sampler for Ising (Added by me)
+    int s_left = _particle(this->pbc(i-1)).getspin();
+    int s_right = _particle(this->pbc(i+1)).getspin();
+    double delta_E = 2.0 * (_H + _J * (s_left + s_right)); 
+    double p_up = 1.0/(1.0 + exp(-_beta * delta_E));
+    if(_rnd.Rannyu() < p_up){
+      _particle(i).setspin(1);
+    } else{
+      _particle(i).setspin(-1);
+    }
+    _naccepted++;
   }
   return;
 }
@@ -130,7 +137,7 @@ int System :: pbc(int i){ // Enforce periodic boundary conditions for spins
   return i;
 } 
 
-//MODIFY BY ME (BEFORE NO ARGUMENT)
+
 void System :: initialize(){ // Initialize the System object according to the content of the input files in the ../INPUT/ directory
 
   // int p1, p2; // Read from ../INPUT/Primes a pair of numbers to be used to initialize the RNG
@@ -476,6 +483,7 @@ void System :: initialize_properties(){ // Initialize data members used for meas
         _nprop += _n_bins_v;
         _bin_size_v = 3.5*sqrt(3.0*_temp)/(double)_n_bins_v; // Max sampling velocity is set to 3.5 times the mean velocity
         _pofv_normalization = _npart * _bin_size_v; // Normalization constant
+        _pofv_increment = 1.0/_pofv_normalization; // Increment normalized to avoid multiple divisions
         _measure_pofv = true;
         _index_pofv = index_property;
         index_property += _n_bins_v;
@@ -719,7 +727,7 @@ void System :: measure(){ // Measure properties
 
       // Check if index bin related to the velocity falls out of range
       if(vel_bin_index < _n_bins_v ){
-        _measurement(_index_pofv + vel_bin_index)+= 1.0/_pofv_normalization;
+        _measurement(_index_pofv + vel_bin_index)+= _pofv_increment;
       }
     }
   }
