@@ -1,0 +1,12 @@
+SIMULATION_TYPE        2/3    1.0    0.0
+RESTART                0
+TEMP                   1.0
+NPART                  50
+RHO                    1.0
+R_CUT                  0.0
+DELTA                  0.0
+NBLOCKS                20
+NSTEPS                 20000
+TAILS                  0/1 # 0 = tail corretions off 1 = tail corrections on NB: needs to be placed after R_CUT and NPART
+
+ENDINPUT
