@@ -18,7 +18,7 @@ The following routines are implemented in this project:
 
 - A routine for the **autocorrelation function analysis**, used to determine the minimum block size required to satisfy the statistical independence requirement for reliable error estimation via the blocking method
 
-- A routine for **sampling the Radial Distribution Function** ($g(r)$).
+- A routine for **sampling the Radial Distribution Function** $g(r)$.
 
 ---
 
@@ -115,7 +115,7 @@ This file contains configuration parameters necessary to set up the simulation.
 | `NSTEPS` | $1/3000$ | Number of steps per simulation block. (Equilibration: $1$, Autocorrelation: $1$, Analysis: $3000$)) |
 | `ENDINPUT` | N/A | Marker indicating the end of the input file. |
 
-**NB**: `TEMP`, `RHO`, `R_CUT` and `DELTA` parameters are listed in the format: gas NVE-gas NVT/liquid NVE-liquid NVT/solid NVE-solid NVT.
+**NB**: `TEMP`, `RHO`, `R_CUT` and `DELTA` parameters are listed in the format: gas NVT-gas NVE/liquid NVT-liquid NVE/solid NVT-solid NVE.
 
 ### `properties.dat`: Measurable Properties
 
