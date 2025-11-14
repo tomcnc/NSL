@@ -788,12 +788,12 @@ void System :: measure(){ // Measure properties
 
   // KINETIC ENERGY PER PARTICLE ////////////////////////////////////////////////////////////
   if (_measure_kenergy){
-    // if(_sim_type == 0){ // LJ NVE uses Verlet algorithm
+    if(_sim_type == 0){ // LJ NVE uses Verlet algorithm
       for (int i=0; i<_npart; i++) kenergy_temp += 0.5 * dot( _particle(i).getvelocity() , _particle(i).getvelocity() );
       kenergy_temp /= double(_npart); 
-    // } else if(_sim_type == 1){
-    //   kenergy_temp = (3.0/2.0) * _temp; // Energy equipartition theorem: kin_tot = 3.0/2.0 * npart * k_B * T
-    // }
+    } else if(_sim_type == 1){
+      kenergy_temp = (3.0/2.0) * _temp; // Energy equipartition theorem: kin_tot = 3.0/2.0 * npart * k_B * T
+    }
     _measurement(_index_kenergy) = kenergy_temp;
   }
 
@@ -855,12 +855,11 @@ void System :: measure(){ // Measure properties
   }
 
   // PRESSURE PER PARTICLE //////////////////////////////////////////////////////////////////
-  // Since NVT computes kinetic energy from reservoir temperature is not necessary to put here 2 if evaluation
-  // because here I will use energy equipartition theorem, already used to compute kintik energy from temperature
+  // Added if evaluation using energy equipartition theorem to compute kinetic energy for NVT simulations
   if (_measure_pressure){
     if(_sim_type == 0){
       _measurement(_index_pressure) = _rho * (2.0/3.0) * kenergy_temp + (_ptail*_npart + 48.0*virial/3.0)/_volume;
-    }else{
+    }else if(_sim_type == 1){
       _measurement(_index_pressure) = _rho * _temp + (_ptail*_npart + 48.0*virial/3.0)/_volume;
     }
   }

@@ -106,16 +106,16 @@ This file contains configuration parameters necessary to set up the simulation.
 | `SIMULATION_TYPE` | $0/1$ | $0$: LJ NVE MD; $1$: LJ NVE MC (M(RT)^2) |
 | `DISTRIBUTION_TYPE` | $0$ | **Only for LJ NVE MD simulations** |
 | `RESTART` | $0/1$ | $0$: Start from initial configuration; $1$: Restart from previous configuration files. |
-| `TEMP` | $1.2-1./1.1-1./0.8-1.$ | Temperature $T$. NVT simulation uses `TEMP` $= 1.2/1.1/0.8$, NVE must start from `TEMP` $= 1./1.972/1.$ to reach the target NVT temperature after equilibration. |
+| `TEMP` | $1.2-0.95/1.1-1.972/0.8-1.5457$ | Temperature $T^{\star}$. **NVT** uses `TEMP` $= 1.2/1.1/0.8$, **NVE** must start from `TEMP` $= 0.95/1.972/1.5457$ to reach the target NVT temperature after equilibration. |
 | `NPART` | $108$ | **Do not change** (critical for initialization). |
 | `RHO` | $0.05/0.8/1.1$ | The reduced density $\rho^*$. |
 | `R_CUT` | $5.0/2.5/2.2$ | The cut-off radius. |
-| `DELTA` | $0.001-0.1005$ | NVE simulation uses time step `DELTA` $= 0.001$, NVT simulation uses Metropolis move step `DELTA` $= /0.1005/$ to achieve an acceptance rate $\approx 0.5$ |
-| `NBLOCKS` | $100/5000/500000$ | Number of blocks for the **blocking method**. (Equilibration: $5000$, Autocorrelation: $500000$, Analysis: $100$). |
-| `NSTEPS` | $1/3000$ | Number of steps per simulation block. (Equilibration: $1$, Autocorrelation: $1$, Analysis: $3000$)) |
+| `DELTA` | $4.8-0.001/0.1005-0.001/0.056-0.001$ | NVE simulation uses time step `DELTA` $= 0.001$, NVT simulation uses Metropolis move step `DELTA` $= 4.8/0.1005/0.056$ to achieve an acceptance rate $\approx 0.5$ |
+| `NBLOCKS` | $30000-100/5000-500000-100/5000-100$ | Number of blocks for the **blocking method**. (Gas Equilibration: $5000$, Gas Analysis: $100$, Liquid Equilibration: $5000$, Liquid Autocorrelation: $500000$, Liquid Analysis: $100$). Solid Equilibration: $5000$, Solid Analysis: $100$  |
+| `NSTEPS` | $1/3000$ | Number of steps per simulation block. (Equilibration: $1$, Autocorrelation: $1$, Analysis: $3000$) for all phases simulations |
 | `ENDINPUT` | N/A | Marker indicating the end of the input file. |
 
-**NB**: `TEMP`, `RHO`, `R_CUT` and `DELTA` parameters are listed in the format: gas NVT-gas NVE/liquid NVT-liquid NVE/solid NVT-solid NVE.
+**NB**: `TEMP`, `RHO`, `R_CUT` and `DELTA` parameters are listed in the format: gas NVT-gas NVE/liquid NVT-liquid NVE/solid NVT-solid NVE. `N_BLOCKS` is listed in the format: Gas Equilibration-Gas Analysis/Liquid Equilibration-Liquid Autocorrelation-Liquid Analysis/Solid Equilibration-Solid Analysis.
 
 ### `properties.dat`: Measurable Properties
 
