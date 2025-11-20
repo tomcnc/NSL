@@ -1,0 +1,10 @@
+SIMULATION_TYPE        4
+RESTART                0/1
+TEMP                   1.1
+NPART                  1
+DELTA                  1.0
+NBLOCKS                100000
+NSTEPS                 1
+NPARAM                 2
+
+ENDINPUT
