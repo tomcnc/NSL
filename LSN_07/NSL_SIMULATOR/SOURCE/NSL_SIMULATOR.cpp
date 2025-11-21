@@ -35,7 +35,7 @@ int main (int argc, char *argv[]){
     }
     SYS.averages(i+1);
     SYS.block_reset(i+1);
-    cout << "UPDATE: block " << i+1 << "/" << SYS.get_nbl() << " completed." << endl;
+    // cout << "UPDATE: block " << i+1 << "/" << SYS.get_nbl() << " completed." << endl;
   }
   SYS.finalize();
 
