@@ -1,7 +1,7 @@
 CC = g++
 CFLAGS = -O3 --std=gnu++2b
 AFLAGS = -larmadillo
-all: simulator.exe
+all: simulator.exe SA.exe
 simulator.exe : system.o NSL_SIMULATOR.o particle.o random.o
 	$(CC) system.o particle.o random.o NSL_SIMULATOR.o -o simulator.exe $(AFLAGS)
 NSL_SIMULATOR.o : NSL_SIMULATOR.cpp system.h particle.h
@@ -17,7 +17,7 @@ particle.o : particle.cpp particle.h
 random.o : random.cpp random.h
 	$(CC) -c random.cpp -o random.o $(CFLAGS)
 clean_exe :
-	rm simulator.exe
+	rm simulator.exe SA.exe
 clean_o :
 	rm *.o
 remove:

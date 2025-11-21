@@ -195,11 +195,11 @@ void System :: initialize(){ // Initialize the System object according to the co
   // Seed >> seed[0] >> seed[1] >> seed[2] >> seed[3];
   // _rnd.SetRandom(seed,p1,p2);
 
-  if(_print_acceptance){
-    ofstream couta("../OUTPUT/acceptance.dat"); // Set the heading line in file ../OUTPUT/acceptance.dat
-    couta << "#   N_BLOCK:  ACCEPTANCE:" << endl;
-    couta.close();
-  }
+  // if(_print_acceptance){
+  //   ofstream couta("../OUTPUT/acceptance.dat"); // Set the heading line in file ../OUTPUT/acceptance.dat
+  //   couta << "#   N_BLOCK:         ACCEPTANCE:" << endl;
+  //   couta.close();
+  // }
 
   ifstream input("../INPUT/input.dat"); // Start reading ../INPUT/input.dat
   ofstream coutf;
@@ -682,6 +682,12 @@ void System :: initialize_properties(){ // Initialize data members used for meas
     cerr << "PROBLEM: Unable to open INPUT file properties.dat" << endl;
     exit(EXIT_FAILURE);
   }
+
+  if(_print_acceptance){
+    ofstream couta("../OUTPUT/acceptance.dat"); // Set the heading line in file ../OUTPUT/acceptance.dat
+    couta << "#   N_BLOCK:         ACCEPTANCE:" << endl;
+    couta.close();
+  }
   
   // according to the number of properties, resize the vectors _measurement,_average,_block_av,_global_av,_global_av2
   _measurement.resize(_nprop);
@@ -1049,7 +1055,7 @@ void System :: measure(){ // Measure properties
     double y1 = 0.5 * d * x1 * x1;
     double y2 = 0.5 * d * x2 * x2;
     double e1 = exp((-1.0)*y1);
-    double e2 = exp((-1-0)*y2);
+    double e2 = exp((-1.0)*y2);
     double h_loc = d * (0.5 - (y1*e1 + y2*e2)/(e1+e2));
     double v = x*x*x*x - 2.5*x*x; // V(x) = x^4 - (5x^2)/2
     _measurement(_index_loc_energy) = h_loc + v;
@@ -1243,27 +1249,28 @@ void System :: averages(int blk){
   // LOCAL ENERGY ////////////////////////////////////////////////////////////
   // Added by me
   if (_measure_loc_energy){
-    coutf.open("../OUTPUT/hamiltonian.dat",ios::app);
     average  = _average(_index_loc_energy);
     sum_average = _global_av(_index_loc_energy);
     sum_ave2 = _global_av2(_index_loc_energy);
     if(_print_vmc){
+      coutf.open("../OUTPUT/hamiltonian.dat",ios::app);
       coutf << setw(12) << blk
             << setw(20) << average  // Average current block
             << setw(20) << sum_average/double(blk)  // Progressive average over blocks
             << setw(20) << this->error(sum_average, sum_ave2, blk) << endl; // Progressive error over blocks
+      coutf.close();
     }
-    coutf.close();
   }
 
   // ACCEPTANCE ////////////////////////////////////////////////////////////////
   double fraction;
-  coutf.open("../OUTPUT/acceptance.dat",ios::app);
-  if(_nattempts > 0) fraction = double(_naccepted)/double(_nattempts);
-  else fraction = 0.0; 
-  coutf << setw(12) << blk << setw(20) << fraction << endl;
-  coutf.close();
-  
+  if(_print_acceptance){
+    coutf.open("../OUTPUT/acceptance.dat",ios::app);
+    if(_nattempts > 0) fraction = double(_naccepted)/double(_nattempts);
+    else fraction = 0.0; 
+    coutf << setw(12) << blk << setw(20) << fraction << endl;
+    coutf.close();
+  }
   return;
 }
 
