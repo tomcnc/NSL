@@ -23,5 +23,12 @@
 # 4. EXECUTABLE FILES
 # ----------------------------------------------------------------------
 
-# Ignora i file .o generati dalla compilazione   
+# Ignora i file .exe generati dalla compilazione   
 *.exe  
+
+# ----------------------------------------------------------------------
+# 4. PYCACHE FILES
+# ----------------------------------------------------------------------
+
+# Ignora i file .pyc generati   
+*.pyc

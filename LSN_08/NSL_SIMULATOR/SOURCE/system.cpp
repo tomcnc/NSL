@@ -669,6 +669,22 @@ void System :: initialize_properties(){ // Initialize data members used for meas
         _print_vmc = false;
       } else if( property == "NO_PRINT_ACC" ){
         _print_acceptance = false;
+      } else if( property == "GS"){
+        if(_sim_type != 4){
+          cerr << "ERROR: GS wave function sampling is incompatible with ensemble simulations." << endl;
+          exit(EXIT_FAILURE);
+        }
+        ofstream coutgs("../OUTPUT/gs.dat");
+        coutgs << "#     BLOCK:         BIN_CENTER:           ACTUAL_V:              V_AVE:              ERROR:" << endl;
+        coutgs.close();
+        input>>_n_bins_gs;
+        _nprop += _n_bins_gs;
+        _bin_size_gs = 5.0/_n_bins_gs; // 5.0 is approximately the range in which particle is confined (see plot ground state)
+        _gs_normalization = _npart * _bin_size_gs; // Normalization constant
+        _gs_increment = 1.0/_gs_normalization; // Increment normalized to avoid multiple divisions
+        _measure_gs = true;
+        _index_gs = index_property;
+        index_property += _n_bins_gs;
       } else if( property == "ENDPROPERTIES" ){
         ofstream coutf;
         coutf.open("../OUTPUT/output.dat",ios::app);
@@ -1063,7 +1079,6 @@ void System :: measure(){ // Measure properties
   }
 
   // LOCAL ENERGY PER STEP //////////////////////////////////////////
-  // This method prints at each step magnetization when property "MAGNETIZATION_STEP" is placed in properties.dat
   // Added by me
   if (_measure_loc_energy_step){
     ofstream coutles("../OUTPUT/hamiltonian_step.dat", ios::app);
@@ -1071,8 +1086,7 @@ void System :: measure(){ // Measure properties
     coutles.close();
   }
 
-  // LOCAL ENERGY PER STEP //////////////////////////////////////////
-  // This method prints at each step magnetization when property "MAGNETIZATION_STEP" is placed in properties.dat
+  // WALKER POSITION //////////////////////////////////////////
   // Added by me
   if (_measure_walker){
     ofstream coutwp("../OUTPUT/walker.dat", ios::app);
@@ -1080,6 +1094,16 @@ void System :: measure(){ // Measure properties
            << setw(20) << _particle(0).getposition(1,true) 
            << setw(20) << _particle(0).getposition(2,true) << endl;
     coutwp.close();
+  }
+
+  // GROUND STATE WAVE FUNCTION 
+  // Added by me
+  if(_measure_gs){
+    double x = _particle(0).getposition(0,true);
+    int bin = int((x + 2.5)/_bin_size_gs); // +2.5 since index = 0 means [-2.5;-2.5+size]
+    if(bin >= 0 and bin < _n_bins_gs){
+      _measurement(_index_gs + bin) += _gs_increment;
+    }
   }
 
   _block_av += _measurement; //Update block accumulators
@@ -1262,6 +1286,25 @@ void System :: averages(int blk){
     }
   }
 
+  // GROUND STATE
+  // Added by me
+  if (_measure_gs && blk == _nblocks){
+    coutf.open("../OUTPUT/gs.dat",ios::app);
+    for(int i{}; i < _n_bins_gs; i++){
+      average = _average(_index_gs + i);
+      sum_average = _global_av(_index_gs + i);
+      sum_ave2 = _global_av2(_index_gs + i);
+      coutf << setw(12) << blk
+            << setw(20) << -2.5 + ((i+0.5) * _bin_size_gs)  // Bin center
+            << setw(20) << average  // Average current block
+            << setw(20) << sum_average/double(blk)  // Progressive average over blocks
+            << setw(20) << this->error(sum_average, sum_ave2, blk) << endl; // Progressive error over blocks
+    }
+    coutf << endl;
+    coutf << endl;
+    coutf.close();
+  } 
+
   // ACCEPTANCE ////////////////////////////////////////////////////////////////
   double fraction;
   if(_print_acceptance){
@@ -1358,7 +1401,8 @@ void System :: SA_fixed_temp_step(){
   for(int i{}; i < _nsteps_SA; i++){
     // print_data_step(i);
     for(int l{}; l < _nparam; l++){
-      _parameters(l) = _parameters_current(l) + _rnd.Rannyu(-1.0, 1.0)*_delta_parameters(l); 
+      _parameters(l) = _parameters_current(l) + _rnd.Rannyu(-1.0, 1.0)*_delta_parameters(l);
+      if(_parameters(1) <= 1e-6) _parameters(1) = 1e-6;
     }
 
     _particle(0).setposition(0, x_current);
@@ -1394,7 +1438,8 @@ void System :: SA(){
   for(int i{}; i < _n_temp; i++){
     SA_fixed_temp_step();
     print_data();
-    _temp -= _delta_temp;
+    // _temp -= _delta_temp;
+    _temp *= _delta_temp;
     _beta = 1.0/_temp;
   }
   finalize();

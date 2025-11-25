@@ -74,19 +74,24 @@ private:
   bool _measure_loc_energy, _measure_loc_energy_step;                       // Added by me --> Flag for measuring Hamiltonian and Hamiltonian at each step (VMC)
   bool _measure_walker;                                                     // Added by me --> Flag for recording walker position sampling GS wave function distribution
   bool _print_vmc = true;                                                   // Added by me --> Disable print VMC blocking method (default==true)
-  bool _print_acceptance = true;                                            // Added by me --> Disable print VMC acceptance (default==true) 
+  bool _print_acceptance = true;                                            // Added by me --> Disable print VMC acceptance (default==true)
+  bool _measure_gs;                                                         // Added by me --> Flag for measuring GS wave function 
   int _index_penergy, _index_kenergy, _index_tenergy;                       // Indices for accessing energy-related properties in vec _measurement
   int _index_temp, _index_pressure, _index_gofr;                            // Indices for accessing temperature, pressure, and radial dist. function
   int _index_magnet, _index_cv, _index_chi;                                 // Indices for accessing magnetization, heat capacity, and susceptibility
   int _index_H2;                                                            // Added by me --> Index for accessing hamiltonian squared to compute specific heat
   int _index_pofv;                                                          // Added by me --> Index for accessing velocity modulus distribution
   int _index_loc_energy;                                                    // Added by me --> Index for accessing Hamiltonian (VMC)
+  int _index_gs;                                                            // Added by me --> Index for accessing GS wave function distribution
   int _n_bins;                                                              // Number of bins for radial distribution function
   int _n_bins_v;                                                            // Number of bins for velocity modulus distribution
+  int _n_bins_gs;                                                           // Added by me --> Number of bins for GS wave function
   double _bin_size;                                                         // Size of bins for radial distribution function
   double _bin_size_v;                                                       // Size of bins for velocity modulus distribution
+  double _bin_size_gs;                                                      // Added by me --> Size of bins for GS wave function
   double _pofv_normalization, _pofv_increment;                              // Added by me --> Normalization and increment constant for velocity modulus distribution
   vec _gofr_normalization, _gofr_increment;                                 // Added by me --> Normalization and increment vector for radial distribution function (vec since each bin has its normalization constant)
+  double _gs_normalization, _gs_increment;                                  // Added by me --> Normalization and increment constant for GS wave function
   double _vtail, _ptail;                                                    // Added by me --> Tail corrections for energy and pressure
   vec _block_av;                                                            // Block averages of properties
   vec _global_av;                                                           // Global averages of properties

@@ -1,0 +1,16 @@
+VARIATIONAL MONTE CARLO (VMC) SIMULATION
+TEMPERATURE= 1.5
+DELTA_TEMP= 0.95
+NTEMP= 250
+SA_TEMP_STEPS= 75
+EQUIL_STEPS= 500
+NPART= 1
+DELTA= 2.65
+NBLOCKS= 50
+NSTEPS= 1000
+NPARAM= 2       PARAM(0)=0.5       PARAM(1)=0.6       
+DELTA_PARAM(0)=0.01       DELTA_PARAM(1)=0.005       
+Reading input completed!
+System initialized!
+Reading properties completed!
+Simulation completed!
