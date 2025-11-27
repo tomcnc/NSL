@@ -12,17 +12,14 @@ The **`NSL_SIMULATOR`** code requires the **Armadillo C++** linear algebra libra
 
 The objective of this project is to implement the **Simulated Annealing (SA)** optimization algorithm to address a quantum mechanical problem. Specifically, the goal is to determine the optimal approximation of the ground state (GS) wave function for a one-dimensional particle subjected to a double-well potential defined by $V(x) = x^4 - 5x^2/2$.
 
-As this problem lacks an **analytical closed-form solution**, a stochastic numerical approach is mandatory. We employ a trial ground state wave function parameterized by $\mu$ and $\sigma$. Leveraging the **Quantum Variational Principle**—which states that the expectation value of the Hamiltonian, $\langle \hat{H} \rangle$, calculated on any arbitrary trial state provides an **upper bound** to the true ground state energy ($E_0$)—we aim to identify the set of variational parameters $(\mu, \sigma)$ that minimizes this expectation value:
-$$
-E(\mu, \sigma) = \frac{\langle \Psi_{\mu, \sigma} | \hat{H} | \Psi_{\mu, \sigma} \rangle}{\langle \Psi_{\mu, \sigma} | \Psi_{\mu, \sigma} \rangle} \ge E_0
-$$
-The calculation of the energy expectation value is performed using the **Variational Monte Carlo (VMC)** method, which applies the Metropolis-Hastings algorithm to sample the probability density $|\Psi(x)|^2$.
+As this problem lacks an **analytical closed-form solution**, a stochastic numerical approach is mandatory. We employ a trial ground state wave function $\Psi_T^{\mu, \sigma}(x)$ parameterized by $\mu$ and $\sigma$. Leveraging the **Quantum Variational Principle**,which states that the expectation value of the Hamiltonian, $\langle \hat{H} \rangle$, calculated on any arbitrary trial state has as a **lower bound** the true ground state energy ($E_0$), we aim to identify the set of variational parameters $(\mu^*, \sigma^*)$ that minimizes this expectation value.
+The calculation of the energy expectation value is performed using the **Variational Monte Carlo (VMC)** method, which applies the Metropolis-Hastings algorithm to sample the probability density $|\Psi_T^{\mu, \sigma}(x)|^2$.
 
 The following routines are implemented in this project:
 
 - A routine for calculating the **Hamiltonian expectation value** using VMC methods and the data blocking technique.
 - A routine to find the **optimal variational parameters** of the GS wave function through the SA optimization algorithm.
-- A routine for the statistical analysis of the GS mean energy and for sampling the probability density ($|\Psi(x)|^2$).
+- A routine for the statistical analysis of the GS mean energy and for sampling the probability density $|\Psi_T^{\mu, \sigma}(x)|^2$.
 
 ---
 
@@ -130,9 +127,8 @@ This file contains configuration parameters necessary to set up the simulation.
 | :--- | :--- | :--- |
 | `SIMULATION_TYPE` | $4$ | $4$: Variational Monte Carlo (VMC). |
 | `RESTART` | $0/1$ | $0$: Start from initial configuration; $1$: Resume from previous configuration (walker position). |
-| `TEMP` | *N/A* | **Dummy parameter**. In VMC for the GS ($T=0$), this value is physically irrelevant. |
 | `NPART` | $1$ | Number of particles. **Do not change**. |
-| `DELTA` | $2.65$ | **VMC Spatial Step ($\delta_x$):** Metropolis step width for the quantum walker position $x$. |
+| `DELTA` | $2.65$ | **VMC Spatial Step ($\Delta_x$):** Metropolis step width for the quantum walker position $x$. |
 | `NBLOCKS` | *User Defined* | Number of blocks for the **data blocking method** (e.g., $5000$ for AC, $250$ for final run). |
 | `NSTEPS` | *User Defined* | Number of VMC steps (spatial moves) per block (e.g., $1$ for AC/Equilibration, $1000$ for final run). |
 | `ENDINPUT` | N/A | Marker indicating the end of the input file. |
