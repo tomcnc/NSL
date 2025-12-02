@@ -42,15 +42,15 @@ LSN_08
 .
 ├── LSN_Exercises_08.ipynb
 ├── LSN_Notebook_8.ipynb                # Jupyter Notebook for data analysis.
-├── NSL_SIMULATOR                       # Simulator code
+├── NSL_SIMULATOR                       # Simulator code.
 │   ├── INPUT
 │   ├── OUTPUT
 │   └── SOURCE
 ├── ReadMe.md
-├── ac_simulation                       # VMC Autocorrelation run files archive
+├── ac_simulation                       # VMC Autocorrelation run files archive.
 │   ├── INPUT
 │   └── OUTPUT
-├── equilibration                       # VMC Equilibration runs files archive
+├── equilibration                       # VMC Equilibration runs files archive.
 │   ├── scenario1
 │   │   ├── INPUT
 │   │   └── OUTPUT
@@ -60,7 +60,7 @@ LSN_08
 │   └── scenario3
 │       ├── INPUT
 │       └── OUTPUT
-├── final_run                           # VMC Final run files archive
+├── final_run                           # VMC Final run files archive.
 │   ├── INPUT
 │   └── OUTPUT
 ├── images
@@ -68,7 +68,7 @@ LSN_08
 │   ├── GS
 │   ├── SA
 │   └── equilibration
-└── runs                                # SA runs files archive
+└── runs                                # SA runs files archive.
     ├── run_01
     │   ├── INPUT
     │   └── OUTPUT
