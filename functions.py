@@ -1,5 +1,8 @@
 import numpy as np
 import re
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import os
 
 def leggi_nparam_da_input(nome_file):
     """
@@ -200,3 +203,160 @@ def get_idx_min(arr):
         # Occurs if the array is empty or contains ONLY NaNs
         print("Warning: Empty array or composed entirely of NaNs.")
         return None, None
+
+
+
+def mp4_animation_creation(city_coords_file, best_paths_file, output_file, interval_ms=100):
+    """
+    Generates an animation visualizing the evolution of the Traveling Salesperson Problem (TSP) 
+    solution across generations.
+
+    :param city_coords_file: Path to the file containing city coordinates (label, X, Y).
+    :param best_paths_file: Path to the file containing the optimal path sequence for each generation.
+    :param output_file: Output file path for the animation archive (MP4 format).
+    :param interval_ms: Delay between frames in milliseconds.
+    """
+    
+    # --- 1. Data Reading and Pre-processing ---
+    
+    # Reading city coordinates.
+    try:
+        # Reads data: [Label (int), X (float), Y (float)].
+        # Uses a structured NumPy dtype to handle mixed data types and skips the header row.
+        coords_data = np.loadtxt(
+            city_coords_file, 
+            dtype={'names': ('label', 'x', 'y'), 'formats': ('i', 'f', 'f')},
+            skiprows=1 
+        )
+        
+        # Creates a dictionary for O(1) coordinate lookup: {label: (x, y)}.
+        city_map = {
+            row['label'].item(): (row['x'].item(), row['y'].item()) 
+            for row in coords_data
+        }
+        
+        # Extract all coordinates for setting axis limits.
+        all_x = coords_data['x']
+        all_y = coords_data['y']
+
+    except Exception as e:
+        print(f"Error reading the coordinates file. Details: {e}")
+        return
+
+    # Reading best paths across generations.
+    try:
+        num_cities_in_path = len(city_map) + 1 # 34 cities + 1 return trip = 35 columns (labels)
+        
+        # Paths are sequences of integer city labels. 
+        # CRITICAL FIX: Skip 3 header rows and use range(1, num_cities_in_path + 1) to select
+        # the path columns, excluding the 'Generation' index (column 0).
+        paths_data = np.loadtxt(
+            best_paths_file, 
+            dtype=int, 
+            usecols=np.arange(1, num_cities_in_path + 1)
+        )
+        
+        # Ensures paths_data is a 2D array, even if only one generation exists.
+        if paths_data.ndim == 1:
+             paths_data = np.array([paths_data])
+             
+        num_generations = paths_data.shape[0]
+        
+    except Exception as e:
+        print(f"Error reading the best paths file. Details: {e}")
+        return
+
+    # --- 1.5. OPTIMIZATION: Pre-calculate all path coordinates ---
+    
+    # Allocates memory for pre-calculated path coordinates.
+    all_path_x = np.zeros((num_generations, num_cities_in_path))
+    all_path_y = np.zeros((num_generations, num_cities_in_path))
+
+    # Perform the coordinate lookup once.
+    for i in range(num_generations):
+        current_path_labels = paths_data[i] 
+        path_coords = np.array([city_map[label] for label in current_path_labels])
+        
+        all_path_x[i] = path_coords[:, 0]
+        all_path_y[i] = path_coords[:, 1]
+    
+    # --- 2. Matplotlib Figure Initialization ---
+    
+    fig, ax = plt.subplots(figsize=(8, 8))
+    
+    # Sets robust axis limits based on data range plus margin.
+    margin = 1.25 # Reduced margin for normalized coordinates
+    x_min, x_max = all_x.min() - margin, all_x.max() + margin
+    y_min, y_max = all_y.min() - margin, all_y.max() + margin
+    ax.set(xlim=[x_min, x_max], ylim=[y_min, y_max], 
+           xlabel='X Coordinate', ylabel='Y Coordinate',
+           title=f'TSP Path Evolution (Generation 1/{num_generations})')
+    
+    # Plots all cities as static markers.
+    ax.scatter(all_x, all_y, color='blue', marker='o', s=25, zorder=5, label='Cities')
+    
+    # Labels each city point.
+    for label, (x, y) in city_map.items():
+        ax.annotate(str(label), (x, y), textcoords="offset points", xytext=(0, 5), ha='center', fontsize=8)
+
+    # Initializes the path line artist (will be updated dynamically).
+    line, = ax.plot([], [], color='red', linestyle='-', zorder=10, label='Best Path') 
+    
+    # Initializes the start/end city marker.
+    start_city_label = paths_data[0, 0]
+    start_x, start_y = city_map[start_city_label]
+    start_marker, = ax.plot(start_x, start_y, 'o', color='green', markersize=10, zorder=15, label='Start/End')
+    
+    ax.legend()
+    
+    # --- 3. Animation Update Function ---
+    
+    def update(frame):
+        # Retrieves pre-calculated coordinates for the current frame.
+        path_x = all_path_x[frame]
+        path_y = all_path_y[frame]
+        
+        # Updates the path line data.
+        line.set_data(path_x, path_y)
+        # Updates the figure title to show current progress.
+        ax.set_title(f'TSP Best Path Evolution (Generation {frame + 1}/{num_generations})')
+        
+        # Returns the modified artists for blitting (if blit=True were used).
+        return line, start_marker, 
+
+    # --- 4. Animation Creation and MP4 Export ---
+    
+    print(f"Creating animation. Target file: {output_file}")
+    
+    ani = animation.FuncAnimation(
+        fig=fig, 
+        func=update, 
+        frames=num_generations, 
+        interval=interval_ms, 
+        blit=False, # Disabled for robust cross-platform rendering
+        repeat=False # Animation runs once through all generations
+    )
+
+    try:
+        print(f"Saving to {output_file}...")
+        # Uses 'ffmpeg' writer to export the MP4 file. fps=10 means 10 generations per second.
+        ani.save(output_file, writer='ffmpeg', fps=10) 
+        print("Saving completed.")
+    
+    except Exception as e:
+        print(f"\nSaving error: {e}")
+        # Provides guidance if the MovieWriter is unavailable.
+        print("WARNING: Ensure the 'ffmpeg' MovieWriter is installed and accessible in your system's PATH.")
+        # Uses the default Pillow writer if ffmpeg fails and saves it as a GIF (optional fallback)
+        if 'ffmpeg' in str(e):
+             print(f"Attempting to save as GIF using Pillow writer...")
+             output_file_gif = os.path.splitext(output_file)[0] + '.gif'
+             ani.save(output_file_gif, writer='pillow', fps=10)
+             print(f"Saved fallback GIF to {output_file_gif}")
+             return output_file_gif
+        return None 
+
+    # Closes the Matplotlib figure to suppress interactive display.
+    plt.close(fig) 
+
+    return output_file

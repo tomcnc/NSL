@@ -42,15 +42,15 @@ LSN_08
 .
 ├── LSN_Exercises_08.ipynb
 ├── LSN_Notebook_8.ipynb                # Jupyter Notebook for data analysis.
-├── NSL_SIMULATOR
+├── NSL_SIMULATOR                       # Simulator code
 │   ├── INPUT
 │   ├── OUTPUT
 │   └── SOURCE
 ├── ReadMe.md
-├── ac_simulation
+├── ac_simulation                       # VMC Autocorrelation run files archive
 │   ├── INPUT
 │   └── OUTPUT
-├── equilibration
+├── equilibration                       # VMC Equilibration runs files archive
 │   ├── scenario1
 │   │   ├── INPUT
 │   │   └── OUTPUT
@@ -60,7 +60,7 @@ LSN_08
 │   └── scenario3
 │       ├── INPUT
 │       └── OUTPUT
-├── final_run
+├── final_run                           # VMC Final run files archive
 │   ├── INPUT
 │   └── OUTPUT
 ├── images
@@ -68,7 +68,7 @@ LSN_08
 │   ├── GS
 │   ├── SA
 │   └── equilibration
-└── runs
+└── runs                                # SA runs files archive
     ├── run_01
     │   ├── INPUT
     │   └── OUTPUT
@@ -175,10 +175,6 @@ This file contains the **Cartesian coordinates** ($x, y, z$) of the quantum walk
 ## 3. Compilation and Execution
 
 This section presents the execution routine and file system management for archiving the output data generated during **simulation**. All subsequent commands must be executed from the `LSN_08/NSL_SIMULATOR/SOURCE/` directory.
-
-## 3. Compilation and Execution :
-
-This section presents the execution routine and file system management for archiving the output data generated during **simulation**. All subsequent commands must be executed from the` LSN_08/NSL_SIMULATOR/SOURCE/` directory.
 
 
 ### 3.1 Compilation
