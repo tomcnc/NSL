@@ -1,0 +1,17 @@
+Process 0 --> Row read from "Primes" file : 0
+Process 0 --> Total number of paths composing the population : 20000
+Process 0 --> Elitism dimension (number of elite individuals) : 2000
+Process 0 --> Total number of cities visited by the traveling salesman : 110
+Process 0 --> City distribution geometry : ITALY
+Process 0 --> Number of generations to simulate : 1000
+Process 0 --> Swap mutation probability : 0.1
+Process 0 --> Shift mutation probability : 0.1
+Process 0 --> Crossover probability : 0.8
+Process 0 --> Inversion mutation probability : 0.1
+Process 0 --> Reading input completed!
+Process 0 --> Cities distribution read from input file!
+Process 0 --> Cities distances computed!
+Process 0 --> Starting population printed!
+Process 0 --> Reading properties completed!
+Process 0 --> _exchange_buffer deleted!
+Process 0 --> Evolution completed!

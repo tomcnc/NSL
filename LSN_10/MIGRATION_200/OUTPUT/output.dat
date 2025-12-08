@@ -1,0 +1,48 @@
+Process 8 --> Row read from "Primes" file : 8
+Process 8 --> Total number of paths composing the population : 200
+Process 8 --> Elitism dimension (number of elite individuals) : 20
+Process 6 --> Total number of cities visited by the traveling salesman : 110
+Process 6 --> City distribution geometry : ITALY
+Process 6 --> Number of generations to simulate : 1000
+Process 6 --> Swap mutation probability : 0.1
+Process 6 --> Shift mutation probability : 0.1
+Process 6 --> Crossover probability : 0.8
+Process 6 --> Inversion mutation probability : 0.1
+Process 6 -->  : Number of path exchanged between processes : 10
+Process 6 -->  : Exchange buffer size : 1100
+Process 6 -->  : Exchange buffer array initialized.
+Process 6 --> Number of exchanges between processes : 10
+Process 6 --> Reading input completed!
+Process 6 --> Cities distribution read from input file!
+Process 6 --> Cities distances computed!
+Process 6 --> Starting population printed!
+Process 9 --> Reading properties completed!
+Process 1 --> Reading properties completed!
+Process 4 --> Reading properties completed!
+Process 0 --> Reading properties completed!
+Process 7 --> Reading properties completed!
+Process 8 --> Reading properties completed!
+Process 5 --> Reading properties completed!
+Process 2 --> Reading properties completed!
+Process 3 --> Reading properties completed!
+Process 6 --> Reading properties completed!
+Process 7 --> _exchange_buffer deleted!
+Process 7 --> Evolution completed!
+Process 6 --> _exchange_buffer deleted!
+Process 6 --> Evolution completed!
+Process 2 --> _exchange_buffer deleted!
+Process 2 --> Evolution completed!
+Process 3 --> _exchange_buffer deleted!
+Process 3 --> Evolution completed!
+Process 8 --> _exchange_buffer deleted!
+Process 8 --> Evolution completed!
+Process 5 --> _exchange_buffer deleted!
+Process 5 --> Evolution completed!
+Process 4 --> _exchange_buffer deleted!
+Process 4 --> Evolution completed!
+Process 1 --> _exchange_buffer deleted!
+Process 1 --> Evolution completed!
+Process 0 --> _exchange_buffer deleted!
+Process 0 --> Evolution completed!
+Process 9 --> _exchange_buffer deleted!
+Process 9 --> Evolution completed!
