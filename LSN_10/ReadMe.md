@@ -209,7 +209,7 @@ ENDINPUT
 
 ### 3.6 `GA.cpp` Set Up
 
-- Comment the following lines of the simulation source code `GA.cpp` (row 40-42) to disable migration for the serial run:
+- Comment lines 40-42 of the simulation source code `GA.cpp` to disable migration for the serial run:
 
 ```cpp
     if(i % messages == 0){
