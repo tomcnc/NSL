@@ -84,17 +84,17 @@ This file contains configuration parameters necessary to set up the simulation.
 
 | Parameter | Recommended Value | Description/Notes |
 | :--- | :--- | :--- |
-| `RND_ROW` | $0$ | $0$: `Primes` file row read to set the LCG seed. |
-| `N_PATH` | $2000$ | Total number of paths (chromosomes) composing the population. |
-| `N_ELITE` | $200$ | Number of best paths preserved for the next generation (Elitism) without undergoing crossover or mutation. |
-| `N_CITY` | $110$ | Total number of cities composing a single path. |
+| `RND_ROW` | *0* | *0*: `Primes` file row read to set the LCG seed. |
+| `N_PATH` | *2000* | Total number of paths (chromosomes) composing the population. |
+| `N_ELITE` | *200* | Number of best paths preserved for the next generation (Elitism) without undergoing crossover or mutation. |
+| `N_CITY` | *110* | Total number of cities composing a single path. |
 | `CITY_DISTRIBUTION` | ITALY | Italian province capital cities. |
 | `P_SWAP` | *0.10* | Probability of **Swap Mutation**: $L$ contiguous cities are swapped with other non-overlapping $L$ contiguous cities. |
 | `P_SHIFT` | *0.10* | Probability of **Shift Mutation**: $L$ contiguous cities are shifted (left or right) by a random step size. |
 | `P_CROSSOVER` | *0.80* | Probability of **Crossover**: High-fitness paths are selected to mix genes and create two new individuals. |
 | `P_INVERSION` | *0.10* | Probability of **Inversion Mutation**: The order of $L$ contiguous cities is inverted. |
-| `N_CHROMO_EXCHANGED` | 100 | Total number of chromosomes exchanged per process during a migration event. |
-| `N_MESSAGE` | 10 | Number of migration events per simulation run. |
+| `N_CHROMO_EXCHANGED` | *100* | Total number of chromosomes exchanged per process during a migration event. |
+| `N_MESSAGE` | *10* | Number of migration events per simulation run. |
 | `ENDINPUT` | N/A | Marker indicating the end of the input file. |
 
 ### `properties.dat`: Measurable Properties
