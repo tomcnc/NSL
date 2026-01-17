@@ -123,11 +123,11 @@ This file lists the properties the simulator measures and outputs.
 
 | Parameter | Description | Applicable Simulation Type(s) | Implemented |
 | :--- | :--- | :--- | :--- |
-| `POTENTIAL_ENERGY` | Average potential energy per particle (using blocking) | $0, 1$ | ✅ |
-| `PRESSURE` | Average pressure (using blocking) | $0, 1$ | ✅ |
-| `TEMPERATURE` | Average temperature (using blocking) | $0, 1$ | ✅ |
-| `KINETIC_ENERGY` | Average kinetic energy per particle (using blocking) | $0, 1$ | ✅ |
-| `GOFR 100` | Radial Distribution Function using $100$ bins | $0, 1$ | ✅ |
+| `POTENTIAL_ENERGY` | Average potential energy per particle (using blocking) | $0/1$ | ✅ |
+| `PRESSURE` | Average pressure (using blocking) | $0/1$ | ✅ |
+| `TEMPERATURE` | Average temperature (using blocking) | $0/1$ | ✅ |
+| `KINETIC_ENERGY` | Average kinetic energy per particle (using blocking) | $0/1$ | ✅ |
+| `GOFR 100` | Radial Distribution Function using $100$ bins | $0/1$ | ✅ |
 | `ENDPROPERTIES` | N/A | Marker indicating the end of the properties file. |
 
 ### `config.xyz`

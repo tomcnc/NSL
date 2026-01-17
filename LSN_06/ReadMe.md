@@ -13,7 +13,7 @@ The **`NSL_SIMULATOR`** code is dependent on the **Armadillo C++** linear algebr
 
 This project implements and compares two fundamental Markov Chain Monte Carlo (MCMC) algorithms:
 
-- **Metropolis-Hastings M(RT)$^2$** Algorithm;
+- **Metropolis-Hastings M(RT)^2** Algorithm;
 
 - **Gibbs Sampling** Algorithm;
 
@@ -90,7 +90,7 @@ This file contains configuration parameters necessary to set up the simulation.
 
 | Parameter | Possible Value | Description/Notes |
 | :--- | :--- | :--- |
-| `SIMULATION_TYPE` | $2/3$  $J$  $H$ | $2$: Ising 1D MC (MRT$^2$); $3$: Ising 1D MC (Gibbs); $J$: spin coupling interaction; $H$: external magnetic field |
+| `SIMULATION_TYPE` | $2/3$  $J$  $H$ | $2$: Ising 1D MC (MRT^2); $3$: Ising 1D MC (Gibbs); $J$: spin coupling interaction; $H$: external magnetic field |
 | `RESTART` | $0/1$ | $0$: Start from initial configuration/velocities; $1$: Restart from previous configuration files. |
 | `TEMP` | $\in \left[ 0.3; 2.0 \right]$ | Temperature $T$. |
 | `NPART` | $50$ | **Do not change** (critical for initialization). |
@@ -107,12 +107,12 @@ This file lists the properties the simulator measures and outputs.
 
 | Parameter | Description | Applicable Simulation Type(s) | Implemented |
 | :--- | :--- | :--- | :--- |
-| `TOTAL_ENERGY` | Average total energy per particle (using blocking) | $2, 3$ | ✅ |
-| `TOTAL_ENERGY_STEP` | Istantaneous total energy per particle per step (monitoring thermalization) | $2, 3$ | ✅ |
-| `MAGNETIZATION` | Magnetization | $2, 3$ | ✅ |
-| `MAGNETIZATION_STEP` | Istantaneous magnetization | $2, 3$ | ✅ |
-| `SPECIFIC_HEAT` | Specific Heat | $2, 3$ | ✅ |
-| `SUSCEPTIBILITY` | Susceptibility | $2, 3$ | ✅ |
+| `TOTAL_ENERGY` | Average total energy per particle (using blocking) | $2/3$ | ✅ |
+| `TOTAL_ENERGY_STEP` | Istantaneous total energy per particle per step (monitoring thermalization) | $2/3$ | ✅ |
+| `MAGNETIZATION` | Magnetization | $2/3$ | ✅ |
+| `MAGNETIZATION_STEP` | Istantaneous magnetization | $2/3$ | ✅ |
+| `SPECIFIC_HEAT` | Specific Heat | $2/3$ | ✅ |
+| `SUSCEPTIBILITY` | Susceptibility | $2/3$ | ✅ |
 | `ENDPROPERTIES` | N/A | Marker indicating the end of the properties file. |
 
 ### `config.ising`

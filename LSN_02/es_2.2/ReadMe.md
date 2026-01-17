@@ -1,9 +1,11 @@
 # Project `es_2.2`: Random Walk Simulation
+
 **Prerequisite**: This project requires the **Armadillo** C++ linear algebra library to be correctly installed and linked on your system.
 
 This repository contains the directory structure and tools required to execute and manage **Random Walk** simulations in both **Discrete** and **Continuous** modes.
 
 ---
+
 ## 1. Project Structure
 
 The project is organized around the main directory `es_2.2`.
@@ -38,6 +40,8 @@ es_2.2/
 └── run_rw.sh                   # Bash Script to automate the entire workflow
 ```
 
+---
+
 ## 2. Configuration File Structure
 
 The simulation's behavior and output observables are governed by the `input.dat` and `properties.dat` files.
@@ -67,20 +71,22 @@ This file defines which observables will be computed and printed to the output d
 | `LAST` | Prints the final position of all simulated Random Walkers. | Remove from `properties.dat` if not needed. |
 
 ---
-## ⚙️ 3. The Execution Script: `run_rw.sh`
+
+## 3. The Execution Script: `run_rw.sh`
 
 The `run_rw.sh` Bash script automates the entire simulation process:
 
 | Phase | Description |
 | :--- | :--- |
-| **Configuration** 📝 | Modifies `RANDOMWALK/INPUT/input.dat`, setting the `RW_TYPE` parameter to `DISCRETE` or `CONTINUOUS`. The modification search is limited up to the `ENDINPUT` line. |
-| **Compilation** 🛠️ | If the executable `main.exe` is not present, it compiles the code (calling `make remove_o` and `make remove_exe` beforehand). |
-| **Execution** ▶️ | Launches the simulation ( `./main.exe` ) from the `SOURCE` directory. |
-| **Archiving** 📦 | **Copies** the `RANDOMWALK/INPUT` and `RANDOMWALK/OUTPUT` directories to the specific archive folder (e.g., `RW_DISCRETE/`). |
-| **Cleanup** 🧹 | Empties the temporary `RANDOMWALK/OUTPUT` directory by executing `make remove_output`. |
+| **Configuration** | Modifies `RANDOMWALK/INPUT/input.dat`, setting the `RW_TYPE` parameter to `DISCRETE` or `CONTINUOUS`. The modification search is limited up to the `ENDINPUT` line. |
+| **Compilation** | If the executable `main.exe` is not present, it compiles the code (calling `make remove_o` and `make remove_exe` beforehand). |
+| **Execution**  | Launches the simulation ( `./main.exe` ) from the `SOURCE` directory. |
+| **Archiving** | **Copies** the `RANDOMWALK/INPUT` and `RANDOMWALK/OUTPUT` directories to the specific archive folder (e.g., `RW_DISCRETE/`). |
+| **Cleanup** | Empties the temporary `RANDOMWALK/OUTPUT` directory by executing `make remove_output`. |
 
 ---
-## 🚀 4. Automated Usage Guide
+
+## 4. Automated Usage Guide
 
 To run a simulation, follow these steps from the project's root directory `es_2.2/`.
 
@@ -109,13 +115,14 @@ Provide the desired mode as an argument.
 ```
 
 ---
+
 ## 5. Manual Solution / Troubleshooting
 
 If command `run_rw.sh` fails, you can execute the entire process manually by following the exact sequence below.
 
 **NB:** Always start in the project's root directory: `es_2.2/`
 
-### Step 1: Cleanup and Compilation 🧼
+### Step 1: Cleanup and Compilation
 
 Start by cleaning up old files and compiling the code from the `SOURCE` directory.
 
@@ -136,7 +143,7 @@ Compile the program:
 make
 ```
 
-### Step 2: Input Configuration ✏️
+### Step 2: Input Configuration
 
 Navigate to the `INPUT` directory and manually modify the `input.dat` configuration file.
 
@@ -157,7 +164,7 @@ Modify the RW_TYPE line to set the mode (choose one):
 Save the file and close the editor.
 
 
-### Step 3: Execution Run 🏃
+### Step 3: Execution Run
 
 Return to the source directory and launch the program.
 
@@ -171,7 +178,7 @@ Run the simulation:
 ./main.exe
 ```
 
-### Step 4: Archiving and Analysis 📊
+### Step 4: Archiving and Analysis
 
 Once the execution is complete, archive the results in the correct directory and proceed to analysis.
 

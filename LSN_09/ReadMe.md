@@ -87,10 +87,10 @@ This file contains configuration parameters necessary to set up the simulation.
 | `N_ELITE` | $100$ | Number of best paths preserved for the next generation (Elitism) without undergoing crossover or mutation. |
 | `N_CITY` | $34$ | Total number of cities composing a single path. |
 | `CITY_DISTRIBUTION` | CIRCLE/SQUARE | Geometric distribution of cities in the plane. |
-| `P_SWAP` | *0.10* | Probability of **Swap Mutation**: $L$ contiguous cities are swapped with other non-overlapping $L$ contiguous cities. |
-| `P_SHIFT` | *0.10* | Probability of **Shift Mutation**: $L$ contiguous cities are shifted (left or right) by a random step size. |
-| `P_CROSSOVER` | *0.80* | Probability of **Crossover**: High-fitness paths are selected to mix genes and create two new individuals. |
-| `P_INVERSION` | *0.10* | Probability of **Inversion Mutation**: The order of $L$ contiguous cities is inverted. |
+| `P_SWAP` | $0.10$ | Probability of **Swap Mutation**: $L$ contiguous cities are swapped with other non-overlapping $L$ contiguous cities. |
+| `P_SHIFT` | $0.10$ | Probability of **Shift Mutation**: $L$ contiguous cities are shifted (left or right) by a random step size. |
+| `P_CROSSOVER` | $0.80$ | Probability of **Crossover**: High-fitness paths are selected to mix genes and create two new individuals. |
+| `P_INVERSION` | $0.10$ | Probability of **Inversion Mutation**: The order of $L$ contiguous cities is inverted. |
 | `ENDINPUT` | N/A | Marker indicating the end of the input file. |
 
 ### `properties.dat`: Measurable Properties

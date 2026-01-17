@@ -66,7 +66,7 @@ This file contains configuration parameters necessary to set up the simulation.
 
 | Parameter | Possible Value | Description/Notes |
 | :--- | :--- | :--- |
-| `SIMULATION_TYPE` | $0/1/2/3$ | $0$: LJ MD (NVE); $1$: LJ MC (NVT); $2$: Ising 1D MC (M(RT)$^2$); $3$: Ising 1D MC (Gibbs). |
+| `SIMULATION_TYPE` | $0/1/2/3$ | $0$: LJ MD (NVE); $1$: LJ MC (NVT); $2$: Ising 1D MC (M(RT)^2); $3$: Ising 1D MC (Gibbs). |
 | `DISTRIBUTION_TYPE` | $0/1$ | $0$: **Maxwell-Boltzmann distribution** (initial velocities); $1$: Dirac Delta distribution. |
 | `RESTART` | $0/1$ | $0$: Start from initial configuration/velocities; $1$: Restart from previous configuration files. |
 | `TEMP` | $\in \mathbb{R}^+$ | The reduced temperature $T^*$. |
@@ -84,22 +84,22 @@ This file lists the properties the simulator measures and outputs.
 
 | Parameter | Description | Applicable Simulation Type(s) | Implemented |
 | :--- | :--- | :--- | :--- |
-| `TOTAL_ENERGY` | Average total energy per particle (using blocking) | $0, 1, 2, 3$ | ✅ |
-| `TOTAL_ENERGY_STEP` | Istantaneous total energy per particle per step (monitoring thermalization) | $0, 1, 2, 3$ | ✅ |
-| `POTENTIAL_ENERGY` | Average potential energy per particle | $0, 1$ | ✅ |
-| `POTENTIAL_ENERGY_STEP` | Istantaneous potential energy per particle | $0, 1$ | ✅ |
-| `KINETIC_ENERGY` | Average kinetic energy per particle | $0, 1$ | ✅ |
-| `KINETIC_ENERGY_STEP` | Istantaneous kinetic energy per particle | $0, 1$ | ✅ |
-| `TEMPERATURE` | Average temperature | $0, 1$ | ✅ |
-| `TEMPERATURE_STEP` | Istantaneous temperature | $0, 1$ | ✅ |
-| `PRESSURE` | Average pressure | $0, 1$ | ✅ |
-| `PRESSURE_STEP` | Istantaneous pressure | $0, 1$ | ✅ |
-| `GOFR` | Radial distribution function $g(r)$ | $0, 1$ | ❌ |
-| **`POFV`** | **Velocity probability distribution** | **$0$** | ✅ |
-| `MAGNETIZATION` | Magnetization | $2, 3$ | ❌ |
-| `MAGNETIZATION_STEP` | Istantaneous magnetization | $2, 3$ | ❌ |
-| `SPECIFIC_HEAT` | Specific Heat | $2, 3$ | ❌ |
-| `SUSCEPTIBILITY` | Susceptibility | $2, 3$ | ❌ |
+| `TOTAL_ENERGY` | Average total energy per particle (using blocking) | $0/1/2/3$ | ✅ |
+| `TOTAL_ENERGY_STEP` | Istantaneous total energy per particle per step (monitoring thermalization) | $0/1/2/3$ | ✅ |
+| `POTENTIAL_ENERGY` | Average potential energy per particle | $0/1$ | ✅ |
+| `POTENTIAL_ENERGY_STEP` | Istantaneous potential energy per particle | $0/1$ | ✅ |
+| `KINETIC_ENERGY` | Average kinetic energy per particle | $0/1$ | ✅ |
+| `KINETIC_ENERGY_STEP` | Istantaneous kinetic energy per particle | $0/1$ | ✅ |
+| `TEMPERATURE` | Average temperature | $0/1$ | ✅ |
+| `TEMPERATURE_STEP` | Istantaneous temperature | $0/1$ | ✅ |
+| `PRESSURE` | Average pressure | $0/1$ | ✅ |
+| `PRESSURE_STEP` | Istantaneous pressure | $0/1$ | ✅ |
+| `GOFR` | Radial distribution function *g(r)* | $0/1$ | ❌ |
+| **`POFV`** | **Velocity probability distribution** | ***0*** | ✅ |
+| `MAGNETIZATION` | Magnetization | $2/3$ | ❌ |
+| `MAGNETIZATION_STEP` | Istantaneous magnetization | $2/3$ | ❌ |
+| `SPECIFIC_HEAT` | Specific Heat | $2/3$ | ❌ |
+| `SUSCEPTIBILITY` | Susceptibility | $2/3$ | ❌ |
 | `ENDPROPERTIES` | N/A | Marker indicating the end of the properties file. |
 
 ### `config.xyz`

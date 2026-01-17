@@ -48,6 +48,8 @@ These commands are available inside (`es_3`) directory for granular file managem
 | `make remove_output` | **CAUTION**: Removes all data files (`*.data`) from the local `OUTPUT/` folder. |
 | `make remove_plot` | Removes all plot produced during the notebook analysis from the `plot/` directory. |
 
+---
+
 ## 3. Operational Guide
 
 All commands in this guide assume you are starting from the **exercise directory** (`LSN_03/es_3`).

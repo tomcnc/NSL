@@ -140,7 +140,7 @@ This file contains configuration parameters necessary to set up the simulation.
 | `SIMULATION_TYPE` | $4$ | $4$: VMC (mode used iteratively for SA optimization). |
 | `RESTART` | $0/1$ | $0$: Start new SA optimization; $1$: Resume SA from previous parameters. |
 | `TEMP` | $1.5$ | **Initial SA Temperature ($T_{SA}$):** Controls the probability of accepting parameter changes that increase $E(\mu, \sigma)$. |
-| `DELTA_TEMP` | 0.95 | **Cooling Rate Factor** ($\alpha$): This parameter defines the schedule for decreasing the Simulated Annealing temperature ($T_{SA}$). The next temperature step ($T_{i+1}$) is calculated by multiplying the current temperature ($T_i$) by this factor, typically a value close to, but less than, 1: $T_{i+1} = T_i \times \alpha$. A value of $\alpha = 0.95$ means the temperature drops by $5\%$ at each cooling step. Choosing a value too close to 1 results in very slow cooling (high accuracy, high computational cost), while a value too low (e.g., $\alpha < 0.9$) risks quenching the system too quickly, trapping the optimization in a local minimum. |
+| `DELTA_TEMP` | $0.95$ | **Cooling Rate Factor** ($\alpha$): This parameter defines the schedule for decreasing the Simulated Annealing temperature ($T_{SA}$). The next temperature step ($T_{i+1}$) is calculated by multiplying the current temperature ($T_i$) by this factor, typically a value close to, but less than, 1: $T_{i+1} = T_i \times \alpha$. A value of $\alpha = 0.95$ means the temperature drops by $5\%$ at each cooling step. Choosing a value too close to 1 results in very slow cooling (high accuracy, high computational cost), while a value too low (e.g., $\alpha < 0.9$) risks quenching the system too quickly, trapping the optimization in a local minimum. |
 | `NTEMP` | $250$ | Total number of temperature cooling steps (Annealing Schedule). |
 | `SA_TEMP_STEPS` | $75$ | Number of Monte Carlo steps in the **parameter space** ($\mu, \sigma$) performed at each fixed temperature. |
 | `EQUIL_STEPS` | $500$ | **Micro-Equilibration Steps**: VMC spatial steps performed after a parameter update to re-thermalize the quantum walker to the new $|\Psi|^2$. |
@@ -148,7 +148,7 @@ This file contains configuration parameters necessary to set up the simulation.
 | `DELTA` | $2.65$ | **VMC Spatial Step ($\delta_x$):** Metropolis step width for the quantum walker. |
 | `NBLOCKS` | $50$ | Number of VMC blocks used for estimating $\langle H \rangle$. |
 | `NSTEPS` | $1000$ | VMC spatial steps per block used for calculating $\langle H \rangle$. |
-| `NPARAM` | $2$ $\mu$ $\sigma$ | Number of variational parameters (2) and their initial starting values. |
+| `NPARAM` | $2$ $\mu$ $\sigma$ | Number of variational parameters ($2$) and their initial starting values. |
 | `DELTA_PARAM` | $\Delta_\mu$ $\Delta_\sigma$ | **Parametric Step Width:** Metropolis step widths for updating the variational parameters $(\mu, \sigma)$ during SA. |
 | `ENDINPUT` | N/A | Marker indicating the end of the input file. |
 
